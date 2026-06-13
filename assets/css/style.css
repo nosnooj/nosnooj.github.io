@@ -1,0 +1,201 @@
+/* ============================================================
+   블루프린트 테마 — 라이트/다크 토큰
+   ============================================================ */
+:root, [data-theme="light"]{
+  --bg:#F4F6F9; --surface:#FFFFFF; --text:#1A202C; --sub:#5A6472; --line:#E2E6EB; --inv:#FFFFFF;
+  --r-lg:14px; --r-md:10px; --r-sm:8px;
+  --c-navy:#1B3A5B; --c-blue:#2362A2; --c-teal:#0E7A6E; --c-green:#3E7A22;
+  --c-amber:#9A6508; --c-coral:#B5482A; --c-purple:#5B4AA8; --c-slate:#4A5568;
+}
+[data-theme="dark"]{
+  --bg:#0E141D; --surface:#161F2B; --text:#E6EBF2; --sub:#9AA8BC; --line:#2A3646; --inv:#0E141D;
+  --c-navy:#8FB3D9; --c-blue:#7FB1E8; --c-teal:#5BC4B8; --c-green:#8CC063;
+  --c-amber:#E0A93E; --c-coral:#E8896B; --c-purple:#A99BE0; --c-slate:#9AA8BC;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Pretendard Variable",Pretendard,-apple-system,"Segoe UI","Malgun Gothic",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65}
+.mono{font-family:ui-monospace,"SF Mono",Consolas,monospace}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+/* ---------- topbar ---------- */
+#topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;padding:11px 22px;
+  background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line)}
+#topbar .logo{font-family:ui-monospace,monospace;font-weight:700;color:var(--c-navy);font-size:14px;text-decoration:none}
+#topbar .logo span{color:var(--sub);font-weight:400}
+#topbar nav{display:flex;gap:4px;margin-left:6px}
+#topbar nav a{color:var(--text);text-decoration:none;font-size:13px;padding:5px 11px;border-radius:var(--r-sm)}
+#topbar nav a:hover{background:color-mix(in srgb,var(--c-navy) 9%,transparent)}
+#topbar .right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.btn{font-size:12.5px;padding:6px 12px;border-radius:var(--r-sm);border:1px solid var(--line);
+  background:var(--surface);color:var(--text);cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block}
+.btn:hover{border-color:color-mix(in srgb,var(--c-navy) 45%,var(--line))}
+.btn.primary{background:var(--c-navy);color:var(--inv);border-color:var(--c-navy)}
+.btn.icon{padding:6px 10px;font-size:14px;line-height:1}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+
+/* ============================================================
+   홈 — 표지 + Work + About
+   ============================================================ */
+#home{--acc:var(--c-navy)}
+.section{margin:34px auto}
+
+#cover-stage{--acc:var(--c-navy);position:relative;overflow:hidden;margin-top:26px;
+  background:color-mix(in srgb,var(--acc) 6%,var(--surface));
+  border:1px solid color-mix(in srgb,var(--acc) 26%,var(--line));border-radius:var(--r-lg);
+  padding:54px 44px 34px;min-height:340px;display:flex;flex-direction:column}
+#cover-stage::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.7;
+  background-image:linear-gradient(color-mix(in srgb,var(--acc) 8%,transparent) 1px,transparent 1px),
+                  linear-gradient(90deg,color-mix(in srgb,var(--acc) 8%,transparent) 1px,transparent 1px);
+  background-size:34px 34px}
+.cover-kicker{font-family:ui-monospace,monospace;font-size:12px;color:var(--acc);letter-spacing:.1em}
+.cover-name{font-size:42px;font-weight:600;margin:10px 0 0;line-height:1.1}
+.cover-role{font-size:17px;color:var(--sub);margin-top:8px}
+.cover-bio{font-family:ui-monospace,monospace;font-size:12.5px;color:var(--acc);margin-top:6px}
+.cover-line{font-size:15px;max-width:600px;margin-top:16px;line-height:1.6}
+.cover-metrics{display:flex;gap:30px;margin-top:26px;flex-wrap:wrap;position:relative}
+.cover-metrics div b{display:block;font-size:25px;font-weight:600;color:var(--acc)}
+.cover-metrics div i{font-style:normal;font-size:11.5px;color:var(--sub)}
+.cover-cta{display:flex;gap:10px;margin-top:auto;padding-top:26px;flex-wrap:wrap;position:relative}
+.scroll-cue{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+  font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.1em;color:var(--sub);text-decoration:none;opacity:.85}
+.scroll-cue:hover{color:var(--acc)}
+
+#work-intro{font-size:15px;max-width:680px;margin:0 0 16px}
+.section-eyebrow{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.12em;color:var(--c-navy);
+  text-transform:uppercase;margin-bottom:6px}
+#work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.wcard{position:relative;border:1px solid var(--line);border-top:3px solid var(--acc);border-radius:var(--r-md);
+  padding:16px 18px;background:var(--surface);text-decoration:none;color:var(--text);display:block;transition:border-color .15s}
+.wcard:hover{border-color:color-mix(in srgb,var(--acc) 50%,var(--line))}
+.wcard .top{display:flex;justify-content:space-between;font-family:ui-monospace,monospace;font-size:11px;color:var(--sub)}
+.wcard .ptag{color:var(--acc);font-weight:700}
+.wcard h3{font-size:16px;margin:8px 0 5px}
+.wcard p{font-size:12.5px;color:var(--sub);margin:0 0 8px;min-height:34px}
+.wcard .stack{font-family:ui-monospace,monospace;font-size:10.5px;color:var(--acc)}
+.wcard .go{position:absolute;bottom:14px;right:16px;font-size:13px;color:var(--acc)}
+#work-grid .wcard:nth-child(1){--acc:var(--c-teal)}
+#work-grid .wcard:nth-child(2){--acc:var(--c-blue)}
+#work-grid .wcard:nth-child(3){--acc:var(--c-amber)}
+#work-grid .wcard:nth-child(4){--acc:var(--c-coral)}
+#work-grid .wcard:nth-child(5){--acc:var(--c-purple)}
+
+/* ---------- About ---------- */
+#about{--acc:var(--c-navy)}
+.about-block{position:relative;border:1px solid var(--line);border-left:3px solid var(--acc);
+  border-radius:0 var(--r-md) var(--r-md) 0;background:var(--surface);padding:16px 20px;margin:14px 0}
+.about-block h3{margin:0 0 10px;font-size:15px;color:var(--acc)}
+#about-lede{font-size:14.5px;line-height:1.8}
+#about-career{--acc:var(--c-navy)} #about-skills{--acc:var(--c-green)}
+#about-education{--acc:var(--c-blue)} #about-certs{--acc:var(--c-amber)} #about-etc{--acc:var(--c-slate)}
+.exp{margin:12px 0 16px}
+.exp .eh{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.exp .eh .mono{font-size:11.5px;color:var(--sub)}
+.exp .eh b{font-size:14px}
+.exp .eh i{font-style:normal;font-size:12px;color:var(--sub)}
+.exp ul{margin:6px 0 0;padding-left:18px}
+.exp li{font-size:13px;margin:4px 0}
+.skill-row{display:flex;gap:10px;align-items:baseline;margin:8px 0}
+.skill-row .lab{flex:0 0 110px;font-size:12px;color:var(--sub);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:11px;padding:2px 9px;border-radius:999px;
+  background:color-mix(in srgb,var(--acc) 9%,transparent);color:var(--acc);
+  border:1px solid color-mix(in srgb,var(--acc) 28%,transparent)}
+.tl{display:flex;gap:12px;align-items:baseline;margin:8px 0;font-size:13.5px}
+.tl .mono{flex:0 0 150px;font-size:11.5px;color:var(--sub)}
+.cert{display:flex;gap:12px;align-items:baseline;margin:7px 0;font-size:13px;border-top:1px solid var(--line);padding-top:7px}
+.cert:first-of-type{border-top:0;padding-top:0}
+.cert .mono{flex:0 0 110px;font-size:11px;color:var(--sub)}
+.cert .id{font-family:ui-monospace,monospace;font-size:11px;color:var(--sub)}
+
+/* ============================================================
+   케이스 스터디
+   ============================================================ */
+.cs{position:relative;margin-top:24px}
+.cs-back{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--acc);text-decoration:none;
+  font-family:ui-monospace,monospace;margin-bottom:12px;padding:4px 12px;
+  border:1px solid color-mix(in srgb,var(--acc) 30%,var(--line));border-radius:999px;
+  background:color-mix(in srgb,var(--acc) 6%,transparent)}
+.cs-back:hover{background:color-mix(in srgb,var(--acc) 12%,transparent)}
+.cs-hero{border-radius:var(--r-lg);border:1px solid color-mix(in srgb,var(--acc) 30%,var(--line));
+  background:color-mix(in srgb,var(--acc) 5%,var(--surface));overflow:hidden}
+.cs-figs{display:flex;gap:12px;padding:14px 16px;background:color-mix(in srgb,var(--acc) 7%,var(--surface));
+  border-bottom:1px dashed color-mix(in srgb,var(--acc) 35%,var(--line))}
+.cs-figs:empty{display:none}
+.fig{flex:1;min-width:0;background:var(--surface);
+  border:1px solid color-mix(in srgb,var(--acc) 22%,var(--line));border-radius:var(--r-sm);padding:9px 11px 11px}
+.fig .cap{font-family:ui-monospace,monospace;font-size:10.5px;color:var(--acc);margin-bottom:6px}
+.fig .fig-slot{text-align:center;padding:26px 13px;color:var(--sub);font-size:12.5px;
+  border:1.5px dashed color-mix(in srgb,var(--acc) 40%,var(--line));border-radius:var(--r-sm)}
+.cs-hero .head{padding:18px 22px 20px}
+.cs-hero .kicker{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--acc);font-weight:700;letter-spacing:.05em}
+.cs-hero h1{font-size:23px;margin:6px 0 4px}
+.cs-hero .sub{font-size:13px;color:var(--sub)}
+
+.cs-body{display:flex;gap:22px;margin-top:20px;align-items:flex-start}
+.cs-main{flex:2;min-width:0}
+.cs-aside{flex:1;min-width:200px;position:sticky;top:64px}
+.glance{border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:0 var(--r-md) var(--r-md) 0;
+  background:var(--surface);padding:15px 17px}
+.glance dt{font-size:11px;font-weight:600;color:var(--sub);margin-top:12px;font-family:ui-monospace,monospace}
+.glance dt:first-of-type{margin-top:0}
+.glance dd{margin:3px 0 0;font-size:13px}
+
+.block{position:relative;margin:16px 0;padding:16px 18px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line)}
+.block > h2{margin:0 0 9px;font-size:15px;color:var(--acc)}
+.block p{margin:0;font-size:13.5px}
+.callout{border:1px solid color-mix(in srgb,var(--acc) 35%,var(--line));border-left:3px solid var(--acc);
+  background:color-mix(in srgb,var(--acc) 6%,transparent)}
+.decision{margin:10px 0;padding-left:14px;border-left:2px solid color-mix(in srgb,var(--acc) 45%,var(--line))}
+.decision b{display:block;font-size:13.5px;color:var(--text);margin-bottom:2px}
+.decision span{font-size:13px;color:var(--sub)}
+
+details.mod{border-top:1px solid var(--line);padding:2px 0}
+details.mod:first-of-type{border-top:0}
+details.mod > summary{list-style:none;cursor:pointer;display:flex;gap:8px;align-items:baseline;
+  padding:9px 2px;font-size:13.5px;font-weight:500}
+details.mod > summary::-webkit-details-marker{display:none}
+details.mod > summary .arr{color:var(--acc);font-size:11px;transition:transform .15s}
+details.mod[open] > summary .arr{transform:rotate(90deg)}
+details.mod ul{margin:2px 0 12px;padding-left:24px}
+details.mod li{font-size:13px;color:var(--sub);margin:5px 0;line-height:1.6}
+
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:4px 0 10px}
+.metric{background:color-mix(in srgb,var(--acc) 6%,var(--surface));
+  border:1px solid color-mix(in srgb,var(--acc) 25%,var(--line));border-radius:var(--r-md);padding:11px 12px}
+.metric b{display:block;font-size:15px;color:var(--acc);font-weight:700}
+.metric i{font-style:normal;font-size:11px;color:var(--sub)}
+.retro{font-size:13px;color:var(--sub);font-style:italic;margin-top:4px}
+.wip{font-size:13px;color:var(--sub);padding:14px 16px;border:1.5px dashed var(--line);border-radius:var(--r-md);
+  background:var(--surface);margin:12px 0}
+
+.cs-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:20px;padding-top:16px;
+  border-top:1px solid var(--line)}
+.cs-nav a{font-size:12.5px;color:var(--acc);text-decoration:none;font-family:ui-monospace,monospace}
+.cs-nav a:hover{text-decoration:underline}
+.cs-nav .disabled{color:var(--sub);opacity:.5;font-family:ui-monospace,monospace;font-size:12.5px}
+
+/* ---------- footer ---------- */
+#footer{border-top:1px solid var(--line);margin-top:36px}
+.foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
+  padding:18px 0 32px;font-size:12px;color:var(--sub)}
+.foot-inner a{color:var(--sub);text-decoration:none}
+.foot-inner a:hover{color:var(--c-navy)}
+
+/* ---------- 반응형 ---------- */
+@media (max-width:860px){
+  #work-grid{grid-template-columns:1fr}
+  .cs-body{flex-direction:column}
+  .cs-aside{position:static;width:100%}
+  .cs-figs{flex-direction:column}
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .cover-name{font-size:34px}
+  .tl .mono,.cert .mono{flex-basis:106px}
+}
+@media (max-width:560px){
+  #topbar nav{display:none}
+}

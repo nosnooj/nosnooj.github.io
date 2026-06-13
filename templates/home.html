@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+<main id="home">
+
+  <!-- 표지 -->
+  <section class="wrap">
+    <div id="cover-stage">
+      <div class="cover-kicker">{{ site.kicker }}</div>
+      <h1 class="cover-name">{{ site.name }}</h1>
+      <div class="cover-role">{{ site.role }}</div>
+      <div class="cover-bio">{{ site.bio_line }}</div>
+      <p class="cover-line">{{ site.positioning }}</p>
+      <div class="cover-metrics">
+        {% for m in site.metrics %}
+        <div><b>{{ m.value }}</b><i>{{ m.label }}</i></div>
+        {% endfor %}
+      </div>
+      <div class="cover-cta">
+        <a class="btn primary" href="#work-grid">프로젝트 보기 ↓</a>
+        {% if site.contacts.resume_pdf %}
+        <a class="btn" href="{{ root }}{{ site.contacts.resume_pdf }}" download>이력서 PDF ↓</a>
+        {% endif %}
+        <a class="btn" href="{{ site.contacts.github_url }}">GitHub</a>
+      </div>
+      <a class="scroll-cue" href="#work-grid" aria-label="프로젝트로 스크롤">↓ scroll</a>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section class="wrap section" id="work">
+    <div class="section-eyebrow">Work</div>
+    <p id="work-intro">{{ site.work_intro }}</p>
+    <div id="work-grid">
+      {% for p in projects %}
+      <a class="wcard" href="{{ root }}work/{{ p.slug }}/" style="--acc:var(--c-{{ p.accent }})">
+        <div class="top"><span class="ptag">{{ p.code }}</span><span>{{ p.period }}</span></div>
+        <h3>{{ p.name }}</h3>
+        <p>{{ p.card_one_liner }}</p>
+        <div class="stack">{{ p.card_stack | join(" · ") }}</div>
+        <span class="go">→</span>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="wrap section" id="about">
+    <div class="section-eyebrow">About</div>
+
+    <div class="about-block" id="about-lede">{{ site.about.lede }}</div>
+
+    <div class="about-block" id="about-career">
+      <h3>경력</h3>
+      {% for c in site.about.career %}
+      <div class="exp">
+        <div class="eh"><span class="mono">{{ c.period }}</span><b>{{ c.company }}</b><i>{{ c.role }}</i></div>
+        <ul>{% for pt in c.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="about-block" id="about-skills">
+      <h3>Skills</h3>
+      {% for s in site.about.skills %}
+      <div class="skill-row">
+        <span class="lab">{{ s.label }}</span>
+        <div class="chips">{% for it in s["items"] %}<span>{{ it }}</span>{% endfor %}</div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="about-block" id="about-education">
+      <h3>학력</h3>
+      {% for e in site.about.education %}
+      <div class="tl"><span class="mono">{{ e.period }}</span><span>{{ e.title }}<br>{{ e.detail }}</span></div>
+      {% endfor %}
+    </div>
+
+    <div class="about-block" id="about-certs">
+      <h3>자격증 · 어학 (전체)</h3>
+      {% for c in site.about.certs %}
+      <div class="cert"><span class="mono">{{ c.date }}</span><span>{{ c.title }} <span class="id">· {{ c.meta }}</span></span></div>
+      {% endfor %}
+    </div>
+
+    <div class="about-block" id="about-etc">
+      <h3>수상 · 활동 · 병역 (전체)</h3>
+      {% for e in site.about.etc %}
+      <div class="cert"><span class="mono">{{ e.date }}</span><span>{{ e.title }}{% if e.detail %}<br>{{ e.detail }}{% endif %}</span></div>
+      {% endfor %}
+    </div>
+  </section>
+
+</main>
+{% endblock %}

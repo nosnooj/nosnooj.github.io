@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}{{ project.name }} — {{ site.name }} 포트폴리오{% endblock %}
+{% block description %}{{ project.hero.title }}. {{ project.glance.key_result }}{% endblock %}
+{% block og_path %}/work/{{ project.slug }}/{% endblock %}
+
+{% block content %}
+<main class="wrap cs" id="page-{{ project.id }}" style="--acc:var(--c-{{ project.accent }})">
+
+  <a class="cs-back" href="{{ root }}#work-grid">← 프로젝트 목록</a>
+
+  <article class="cs-hero">
+    <div class="cs-figs">
+      {% for fig in project.figures %}
+      <figure class="fig">
+        <figcaption class="cap">{{ fig.cap }}</figcaption>
+        {% if fig.svg %}{{ fig.svg | safe }}{% else %}<div class="fig-slot">도면 SVG (제작 예정)</div>{% endif %}
+      </figure>
+      {% endfor %}
+    </div>
+    <div class="head">
+      <div class="kicker">{{ project.hero.kicker }}</div>
+      <h1>{{ project.hero.title }}</h1>
+      <div class="sub">{{ project.hero.sub }}</div>
+    </div>
+  </article>
+
+  <div class="cs-body">
+    <div class="cs-main">
+
+      <section class="block" id="{{ project.id }}-problem">
+        <h2>문제</h2>
+        {% if project.problem %}<p>{{ project.problem }}</p>
+        {% else %}<div class="wip">이력서 {{ project.code }} 작성 후 채울 예정입니다.</div>{% endif %}
+      </section>
+
+      <section class="block callout" id="{{ project.id }}-decisions">
+        <h2>설계 결정</h2>
+        {% if project.decisions %}
+          {% for d in project.decisions %}
+          <div class="decision"><b>{{ d.head }}</b><span>{{ d.body }}</span></div>
+          {% endfor %}
+        {% else %}<div class="wip">이력서 {{ project.code }} 작성 후 채울 예정입니다.</div>{% endif %}
+      </section>
+
+      <section class="block" id="{{ project.id }}-build">
+        <h2>구현</h2>
+        {% if project.build %}
+          {% for mod in project.build %}
+          <details class="mod"{% if loop.first %} open{% endif %}>
+            <summary><span class="arr">▸</span><span>{{ mod.module }}</span></summary>
+            <ul>{% for pt in mod.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+          </details>
+          {% endfor %}
+        {% else %}<div class="wip">모듈별 구현 상세는 이력서 {{ project.code }} 작성 후 채웁니다.</div>{% endif %}
+      </section>
+
+      <section class="block" id="{{ project.id }}-result">
+        <h2>성과</h2>
+        {% if project.result.metrics %}
+          <div class="metrics">
+            {% for m in project.result.metrics %}
+            <div class="metric"><b>{{ m.value }}</b><i>{{ m.label }}</i></div>
+            {% endfor %}
+          </div>
+          {% if project.result.retro %}<p class="retro">“{{ project.result.retro }}”</p>{% endif %}
+        {% else %}<div class="wip">성과 지표는 이력서 {{ project.code }} 작성 후 확정합니다.</div>{% endif %}
+      </section>
+
+    </div>
+
+    <aside class="cs-aside">
+      <dl class="glance" id="{{ project.id }}-glance">
+        <dt>역할</dt><dd>{{ project.glance.role }}</dd>
+        <dt>기간</dt><dd>{{ project.glance.period }}</dd>
+        <dt>스택</dt><dd><div class="chips">{% for s in project.glance.stack %}<span>{{ s }}</span>{% endfor %}</div></dd>
+        <dt>핵심 성과</dt><dd>{{ project.glance.key_result }}</dd>
+      </dl>
+    </aside>
+  </div>
+
+  <nav class="cs-nav">
+    {% if prev %}<a href="{{ root }}work/{{ prev.slug }}/">← 이전: {{ prev.code }}</a>{% else %}<span class="disabled">← 이전</span>{% endif %}
+    <a href="{{ root }}#work-grid">프로젝트 목록</a>
+    {% if next %}<a href="{{ root }}work/{{ next.slug }}/">다음: {{ next.code }} →</a>{% else %}<span class="disabled">다음 →</span>{% endif %}
+  </nav>
+
+</main>
+{% endblock %}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ site.name }} — 백엔드 개발자 포트폴리오{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ site.name }} · {{ site.role }}. 장비 연동·결제·ERP·인프라까지 데이터 흐름을 설계하는 백엔드 개발자.{% endblock %}">
+<meta property="og:title" content="{{ self.title() }}">
+<meta property="og:description" content="{{ self.description() }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ site.contacts.site_url }}{% block og_path %}/{% endblock %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="{{ root }}assets/css/style.css">
+{% if diagram_css %}<style id="diagram-vars">{{ diagram_css | safe }}</style>{% endif %}
+<script>
+/* FOUC 방지: 페인트 전에 테마 확정 (저장값 → OS 설정 순) */
+(function(){
+  try {
+    var saved = localStorage.getItem("theme");
+    var dark = saved ? saved === "dark"
+                     : matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.dataset.theme = dark ? "dark" : "light";
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+
+<header id="topbar">
+  <a class="logo" href="{{ root }}">nosnooj<span>.github.io</span></a>
+  <nav>
+    <a href="{{ root }}">홈</a>
+    <a href="{{ root }}#work-grid">Work</a>
+    <a href="{{ root }}#about">About</a>
+  </nav>
+  <div class="right">
+    {% if site.contacts.resume_pdf %}
+    <a class="btn primary" href="{{ root }}{{ site.contacts.resume_pdf }}" download>이력서 PDF ↓</a>
+    {% else %}
+    <button class="btn primary" type="button" disabled title="PDF 업로드 후 활성화">이력서 PDF ↓</button>
+    {% endif %}
+    <button class="btn icon" type="button" onclick="toggleTheme()" aria-label="라이트/다크 전환">◐</button>
+  </div>
+</header>
+
+{% block content %}{% endblock %}
+
+<footer id="footer">
+  <div class="wrap foot-inner">
+    <span>© 2026 {{ site.name }} — {{ site.role }}</span>
+    <span class="mono">
+      <a href="{{ site.contacts.github_url }}">{{ site.contacts.github }}</a>
+      · {{ site.contacts.email }}
+    </span>
+  </div>
+</footer>
+
+<script src="{{ root }}assets/js/theme.js" defer></script>
+</body>
+</html>
