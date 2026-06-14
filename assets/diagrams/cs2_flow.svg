@@ -1,0 +1,88 @@
+<svg viewBox="0 0 880 720" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans KR','Malgun Gothic','Segoe UI',Roboto,sans-serif" role="img" aria-labelledby="ttl desc">
+<title id="ttl">LESS 월 결산 연동 플로우</title>
+<desc id="desc">연동관리자가 월별로 수행하는 매출 취합·검증부터 ERP10 수주·생산지시 전송과 실패 재처리까지의 프로세스</desc>
+<style>svg{--bg:#FFFFFF; --ink:#16222E; --sub:#5B6B7B; --navy:#1B3A5B; --surface:#FFFFFF; --border:#C9D4DE; --appfill:#FBFCFE; --appborder:#C7D2DD; --header:#EEF3F8; --band:#F4F7FB; --ext:#F1F4F7; --extborder:#BAC4CE; --blue:#1D5FB4; --bluefill:#E8F0FB; --blueborder:#B7CEEC; --amber:#C77A12; --amberfill:#FCF5E8; --amberborder:#E7CF9F; --pillamber:#FBEED6; --pillnavy:#E4ECF4; --pillblue:#E1ECFB; --cylfill:#E2ECF9; --gray:#6B7280; --notefill:#F7F9FB; --warn:#C0392B;} @media (prefers-color-scheme:dark){svg{--bg:#0E1620; --ink:#E7EDF3; --sub:#9DAEBE; --navy:#86ABD4; --surface:#172331; --border:#34434F; --appfill:#131D29; --appborder:#33414E; --header:#1C2937; --band:#16212E; --ext:#1A2734; --extborder:#3A4856; --blue:#6FA6F2; --bluefill:#162840; --blueborder:#2F4D72; --amber:#E2AB52; --amberfill:#2A2417; --amberborder:#574828; --pillamber:#3A2D15; --pillnavy:#1E2F45; --pillblue:#172A45; --cylfill:#162840; --gray:#94A2B0; --notefill:#18242F; --warn:#E5736A;}}</style>
+<rect x="0" y="0" width="880" height="720" fill="var(--bg)"/>
+<defs>
+<marker id="a-navy" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2.4,4 Z" fill="var(--navy)"/></marker>
+<marker id="a-blue" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2.4,4 Z" fill="var(--blue)"/></marker>
+<marker id="a-amber" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2.4,4 Z" fill="var(--amber)"/></marker>
+<marker id="a-gray" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2.4,4 Z" fill="var(--gray)"/></marker>
+<marker id="a-warn" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2.4,4 Z" fill="var(--warn)"/></marker>
+</defs>
+<text x="28" y="34" font-size="19" font-weight="700" fill="var(--navy)" text-anchor="start" >LESS — 월 결산 연동 플로우</text>
+<text x="28" y="55" font-size="11" font-weight="400" fill="var(--sub)" text-anchor="start" >연동관리자 월별 프로세스 · 매출 취합 → 검증 → ERP10 전송 → 실패 건 재처리</text>
+<rect x="276.0" y="74" width="180" height="26" rx="13.0" fill="var(--pillnavy)" stroke="var(--navy)" stroke-width="1"/>
+<text x="366.0" y="87.0" font-size="11" font-weight="700" fill="var(--navy)" text-anchor="middle"  dominant-baseline="middle">월초 결산 시작</text>
+<polyline points="366.0,100 366.0,110" fill="none" stroke="var(--blue)" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="96" y="110" width="540" height="70" rx="10" fill="var(--surface)" stroke="var(--border)" stroke-width="1.2"/>
+<rect x="96" y="110" width="3.4" height="70" rx="1.7" fill="var(--navy)"/>
+<circle cx="122" cy="145.0" r="13" fill="var(--pillblue)" stroke="var(--navy)" stroke-width="1.3"/>
+<text x="122" y="145.5" font-size="12" font-weight="700" fill="var(--navy)" text-anchor="middle"  dominant-baseline="middle">1</text>
+<text x="146" y="132" font-size="12.5" font-weight="700" fill="var(--ink)" text-anchor="start" >마스터데이터 준비</text>
+<text x="146" y="150" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >공정경로·BOM 동기화 (ERP10 조회)</text>
+<text x="146" y="165" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >기준환율 · 무료조정금액 · 회계 매출액 입력</text>
+<rect x="570" y="119" width="48" height="17" rx="8.5" fill="var(--band)" stroke="var(--border)" stroke-width="1"/>
+<text x="594.0" y="127.5" font-size="8.6" font-weight="600" fill="var(--sub)" text-anchor="middle"  dominant-baseline="middle">운영DB</text>
+<rect x="516" y="119" width="48" height="17" rx="8.5" fill="var(--band)" stroke="var(--border)" stroke-width="1"/>
+<text x="540.0" y="127.5" font-size="8.6" font-weight="600" fill="var(--sub)" text-anchor="middle"  dominant-baseline="middle">ERP10</text>
+<polyline points="366.0,180 366.0,214" fill="none" stroke="var(--blue)" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="96" y="214" width="540" height="70" rx="10" fill="var(--surface)" stroke="var(--border)" stroke-width="1.2"/>
+<rect x="96" y="214" width="3.4" height="70" rx="1.7" fill="var(--blue)"/>
+<circle cx="122" cy="249.0" r="13" fill="var(--pillblue)" stroke="var(--blue)" stroke-width="1.3"/>
+<text x="122" y="249.5" font-size="12" font-weight="700" fill="var(--blue)" text-anchor="middle"  dominant-baseline="middle">2</text>
+<text x="146" y="236" font-size="12.5" font-weight="700" fill="var(--ink)" text-anchor="start" >매출 취합 · 조회 · 검증</text>
+<text x="146" y="254" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >LIS(MSSQL)에서 검사·매출 분야별 전략으로 취합</text>
+<text x="146" y="269" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >무료조정 검증·중복 방지 → 운영 DB(MySQL) 저장</text>
+<rect x="570" y="223" width="48" height="17" rx="8.5" fill="var(--band)" stroke="var(--border)" stroke-width="1"/>
+<text x="594.0" y="231.5" font-size="8.6" font-weight="600" fill="var(--sub)" text-anchor="middle"  dominant-baseline="middle">운영DB</text>
+<rect x="516" y="223" width="48" height="17" rx="8.5" fill="var(--band)" stroke="var(--border)" stroke-width="1"/>
+<text x="540.0" y="231.5" font-size="8.6" font-weight="600" fill="var(--sub)" text-anchor="middle"  dominant-baseline="middle">LIS</text>
+<polyline points="366.0,284 366.0,318" fill="none" stroke="var(--blue)" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="96" y="318" width="540" height="70" rx="10" fill="var(--surface)" stroke="var(--border)" stroke-width="1.2"/>
+<rect x="96" y="318" width="3.4" height="70" rx="1.7" fill="var(--blue)"/>
+<circle cx="122" cy="353.0" r="13" fill="var(--pillblue)" stroke="var(--blue)" stroke-width="1.3"/>
+<text x="122" y="353.5" font-size="12" font-weight="700" fill="var(--blue)" text-anchor="middle"  dominant-baseline="middle">3</text>
+<text x="146" y="340" font-size="12.5" font-weight="700" fill="var(--ink)" text-anchor="start" >수주(SO) 연동</text>
+<text x="146" y="358" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >검증 매출 CamelCase→Snake 변환</text>
+<text x="146" y="373" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >WebFlux로 ERP10 수주 입력 · send_yn ‘N’→‘Y’</text>
+<rect x="570" y="327" width="48" height="17" rx="8.5" fill="var(--band)" stroke="var(--border)" stroke-width="1"/>
+<text x="594.0" y="335.5" font-size="8.6" font-weight="600" fill="var(--sub)" text-anchor="middle"  dominant-baseline="middle">ERP10</text>
+<rect x="516" y="327" width="48" height="17" rx="8.5" fill="var(--band)" stroke="var(--border)" stroke-width="1"/>
+<text x="540.0" y="335.5" font-size="8.6" font-weight="600" fill="var(--sub)" text-anchor="middle"  dominant-baseline="middle">운영DB</text>
+<polyline points="366.0,388 366.0,422" fill="none" stroke="var(--blue)" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="96" y="422" width="540" height="70" rx="10" fill="var(--surface)" stroke="var(--border)" stroke-width="1.2"/>
+<rect x="96" y="422" width="3.4" height="70" rx="1.7" fill="var(--blue)"/>
+<circle cx="122" cy="457.0" r="13" fill="var(--pillblue)" stroke="var(--blue)" stroke-width="1.3"/>
+<text x="122" y="457.5" font-size="12" font-weight="700" fill="var(--blue)" text-anchor="middle"  dominant-baseline="middle">4</text>
+<text x="146" y="444" font-size="12.5" font-weight="700" fill="var(--ink)" text-anchor="start" >생산지시 연동</text>
+<text x="146" y="462" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >생산지시 목록 생성 · 공정경로·BOM 설정</text>
+<text x="146" y="477" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >ERP10 생산지시 전송 · send_yn ‘N’→‘Y’</text>
+<rect x="570" y="431" width="48" height="17" rx="8.5" fill="var(--band)" stroke="var(--border)" stroke-width="1"/>
+<text x="594.0" y="439.5" font-size="8.6" font-weight="600" fill="var(--sub)" text-anchor="middle"  dominant-baseline="middle">ERP10</text>
+<rect x="516" y="431" width="48" height="17" rx="8.5" fill="var(--band)" stroke="var(--border)" stroke-width="1"/>
+<text x="540.0" y="439.5" font-size="8.6" font-weight="600" fill="var(--sub)" text-anchor="middle"  dominant-baseline="middle">운영DB</text>
+<polyline points="366.0,492 366.0,526" fill="none" stroke="var(--blue)" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="96" y="526" width="540" height="70" rx="10" fill="var(--surface)" stroke="var(--border)" stroke-width="1.2"/>
+<rect x="96" y="526" width="3.4" height="70" rx="1.7" fill="var(--amber)"/>
+<circle cx="122" cy="561.0" r="13" fill="var(--pillamber)" stroke="var(--amber)" stroke-width="1.3"/>
+<text x="122" y="561.5" font-size="12" font-weight="700" fill="var(--amber)" text-anchor="middle"  dominant-baseline="middle">5</text>
+<text x="146" y="548" font-size="12.5" font-weight="700" fill="var(--ink)" text-anchor="start" >연동 이력 · 재처리</text>
+<text x="146" y="566" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >건별 성공/실패 로그 저장 · 실패 건만 선별 재연동</text>
+<text x="146" y="581" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >결산 매출 Excel(Apache POI) 추출</text>
+<rect x="570" y="535" width="48" height="17" rx="8.5" fill="var(--band)" stroke="var(--border)" stroke-width="1"/>
+<text x="594.0" y="543.5" font-size="8.6" font-weight="600" fill="var(--sub)" text-anchor="middle"  dominant-baseline="middle">운영DB</text>
+<polyline points="366.0,596 366.0,630" fill="none" stroke="var(--blue)" stroke-width="1.8" marker-end="url(#a-blue)"/>
+<rect x="256.0" y="630" width="220" height="26" rx="13.0" fill="var(--pillblue)" stroke="var(--blue)" stroke-width="1"/>
+<text x="366.0" y="643.0" font-size="11" font-weight="700" fill="var(--blue)" text-anchor="middle"  dominant-baseline="middle">결산 마감 · 정합성 확보</text>
+<polyline points="636,561.0 700,561.0 700,353.0 636,353.0" fill="none" stroke="var(--warn)" stroke-width="1.7" marker-end="url(#a-warn)" stroke-dasharray="6 4"/>
+<text x="712" y="449.0" font-size="9.5" font-weight="700" fill="var(--warn)" text-anchor="start" >실패 건</text>
+<text x="712" y="463.0" font-size="9.5" font-weight="700" fill="var(--warn)" text-anchor="start" >재연동</text>
+<text x="712" y="477.0" font-size="9" font-weight="400" fill="var(--sub)" text-anchor="start" >(재시도 루프)</text>
+<line x1="28" y1="690" x2="56" y2="690" stroke="var(--blue)" stroke-width="2.6" marker-end="url(#a-blue)"/>
+<text x="64" y="694" font-size="10.5" font-weight="400" fill="var(--ink)" text-anchor="start" >정상 흐름</text>
+<line x1="150" y1="690" x2="178" y2="690" stroke="var(--warn)" stroke-width="2.6" marker-end="url(#a-warn)"/>
+<text x="186" y="694" font-size="10.5" font-weight="400" fill="var(--ink)" text-anchor="start" >실패 재처리 루프</text>
+<text x="322" y="694" font-size="10" font-weight="400" fill="var(--ink)" text-anchor="start" >send_yn  ‘N’(대기) → ‘Y’(전송 완료)</text>
+<text x="566" y="694" font-size="9.5" font-weight="400" fill="var(--sub)" text-anchor="start" >시스템 태그 = 해당 단계가 접근하는 데이터/시스템</text>
+</svg>

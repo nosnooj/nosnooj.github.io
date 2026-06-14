@@ -6,13 +6,19 @@
 {% block content %}
 <main class="wrap cs" id="page-{{ project.id }}" style="--acc:var(--c-{{ project.accent }})">
 
-  <a class="cs-back" href="{{ root }}#work-grid">← 프로젝트 목록</a>
+  <div class="cs-top">
+    <a class="cs-back" href="{{ root }}#work">← 프로젝트 목록</a>
+    <span class="cs-pager">
+      {% if prev %}<a href="{{ root }}work/{{ prev.slug }}/">← 이전 {{ prev.code }}</a>{% endif %}
+      {% if next %}<a href="{{ root }}work/{{ next.slug }}/">다음 {{ next.code }} →</a>{% endif %}
+    </span>
+  </div>
 
   <article class="cs-hero">
     <div class="cs-figs">
       {% for fig in project.figures %}
-      <figure class="fig">
-        <figcaption class="cap">{{ fig.cap }}</figcaption>
+      <figure class="fig{% if fig.svg %} zoomable{% endif %}">
+        <figcaption class="cap">{{ fig.cap }}{% if fig.svg %}<span class="zoom-hint">⤢ 클릭하여 크게 보기</span>{% endif %}</figcaption>
         {% if fig.svg %}{{ fig.svg | safe }}{% else %}<div class="fig-slot">도면 SVG (제작 예정)</div>{% endif %}
       </figure>
       {% endfor %}
@@ -44,26 +50,20 @@
 
       <section class="block" id="{{ project.id }}-build">
         <h2>구현</h2>
+        {% if project.build_fig and project.build_fig.svg %}
+        <figure class="fig zoomable cs-build-fig">
+          <figcaption class="cap">{{ project.build_fig.cap }}<span class="zoom-hint">⤢ 클릭하여 크게 보기</span></figcaption>
+          {{ project.build_fig.svg | safe }}
+        </figure>
+        {% endif %}
         {% if project.build %}
           {% for mod in project.build %}
-          <details class="mod"{% if loop.first %} open{% endif %}>
+          <details class="mod" open>
             <summary><span class="arr">▸</span><span>{{ mod.module }}</span></summary>
             <ul>{% for pt in mod.points %}<li>{{ pt }}</li>{% endfor %}</ul>
           </details>
           {% endfor %}
         {% else %}<div class="wip">모듈별 구현 상세는 이력서 {{ project.code }} 작성 후 채웁니다.</div>{% endif %}
-      </section>
-
-      <section class="block" id="{{ project.id }}-result">
-        <h2>성과</h2>
-        {% if project.result.metrics %}
-          <div class="metrics">
-            {% for m in project.result.metrics %}
-            <div class="metric"><b>{{ m.value }}</b><i>{{ m.label }}</i></div>
-            {% endfor %}
-          </div>
-          {% if project.result.retro %}<p class="retro">“{{ project.result.retro }}”</p>{% endif %}
-        {% else %}<div class="wip">성과 지표는 이력서 {{ project.code }} 작성 후 확정합니다.</div>{% endif %}
       </section>
 
     </div>
@@ -75,12 +75,24 @@
         <dt>스택</dt><dd><div class="chips">{% for s in project.glance.stack %}<span>{{ s }}</span>{% endfor %}</div></dd>
         <dt>핵심 성과</dt><dd>{{ project.glance.key_result }}</dd>
       </dl>
+
+      <section class="block" id="{{ project.id }}-result">
+        <h2>성과</h2>
+        {% if project.result.metrics %}
+          <div class="metrics{% if project.result.metrics|length <= 2 %} stack{% endif %}">
+            {% for m in project.result.metrics %}
+            <div class="metric"><b>{{ m.value }}</b><i>{{ m.label }}</i></div>
+            {% endfor %}
+          </div>
+          {% if project.result.retro %}<p class="retro">“{{ project.result.retro }}”</p>{% endif %}
+        {% else %}<div class="wip">성과 지표는 이력서 {{ project.code }} 작성 후 확정합니다.</div>{% endif %}
+      </section>
     </aside>
   </div>
 
   <nav class="cs-nav">
     {% if prev %}<a href="{{ root }}work/{{ prev.slug }}/">← 이전: {{ prev.code }}</a>{% else %}<span class="disabled">← 이전</span>{% endif %}
-    <a href="{{ root }}#work-grid">프로젝트 목록</a>
+    <a href="{{ root }}#work">프로젝트 목록</a>
     {% if next %}<a href="{{ root }}work/{{ next.slug }}/">다음: {{ next.code }} →</a>{% else %}<span class="disabled">다음 →</span>{% endif %}
   </nav>
 

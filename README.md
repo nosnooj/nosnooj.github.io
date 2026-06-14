@@ -23,8 +23,9 @@ portfolio/
 ├── assets/
 │   ├── css/style.css            # 블루프린트 테마 토큰 (라이트/다크)
 │   ├── js/theme.js              # 테마 토글(localStorage 영속)
-│   ├── diagrams/cs1_arch.svg    # CS1 시스템 아키텍처 도면
-│   └── pdf/                      # 이력서 PDF (업로드 후 content.py에 경로 지정)
+│   ├── diagrams/                # 케이스 스터디 SVG 도면 (빌드 시 HTML 인라인)
+│   ├── img/profile.jpg          # 증명사진
+│   └── files/                   # 이력서 PDF·DOCX (다운로드 대상)
 ├── requirements.txt
 └── .github/workflows/deploy.yml # push → 빌드 → Pages 자동 배포
 ```
@@ -36,9 +37,9 @@ portfolio/
 | `/` | 표지 + Work 인덱스 + About (스크롤) |
 | `/work/lims/` | CS1 — Microarray LIMS · 결과지 자동화 |
 | `/work/less/` | CS2 — LIS–ERP 연동 (LESS) |
-| `/work/cos/` | CS3 — B2B 주문·정산 (COS) |
-| `/work/ib/` | CS4 — B2C 영양제 추천 (IB) |
-| `/work/aws/` | CS5 — 온프레미스 → AWS 전환 |
+| `/work/aws/` | CS3 — 온프레미스 → AWS 전환 |
+| `/work/cos/` | CS4 — B2B 주문·정산 (COS) |
+| `/work/ib/` | CS5 — B2C 영양제 추천 (IB) |
 
 ## 로컬 실행
 
@@ -48,12 +49,32 @@ python build.py                       # dist/ 생성
 python -m http.server -d dist 8000    # http://localhost:8000
 ```
 
+## 브랜치 워크플로
+
+- **`develop`** — 작업·로컬 테스트용. 여기에 push해도 **배포되지 않는다**.
+- **`main`** — 배포용. push되면 GitHub Actions가 자동 빌드·배포한다.
+
+```bash
+# 작업
+git checkout develop
+# ...편집...
+./dev.sh                 # 빌드 + http://localhost:8000 미리보기
+git add -A && git commit -m "작업 내용"
+git push                 # develop 백업 (배포 안 됨)
+
+# 배포
+git checkout main
+git merge develop
+git push                 # → Actions 자동 배포
+git checkout develop
+```
+
 ## 배포
 
 `main` 브랜치에 push하면 GitHub Actions가 빌드 후 GitHub Pages로 배포합니다.
 저장소 **Settings → Pages → Source: GitHub Actions** 로 설정하세요.
+워크플로는 `main` push에만 반응하므로 `develop` 작업은 배포에 영향을 주지 않습니다.
 
-## 콘텐츠 채우기
+## 콘텐츠 수정
 
-CS2~CS5는 현재 인덱스 카드 + 골격만 있고 본문은 비어 있습니다(이력서 작성 진행에 맞춰 채울 예정).
-`data/content.py`의 해당 프로젝트 `problem`·`decisions`·`build`·`result`를 채우면 자동 반영됩니다.
+모든 문구·성과·프로젝트 내용은 `data/content.py` 한 곳에서 수정합니다. 케이스 스터디는 각 프로젝트의 `problem`·`decisions`·`build`·`result`, 이력서 다운로드는 `resumes[]`, 증명사진은 `profile_photo`를 수정하면 전 페이지에 반영됩니다.

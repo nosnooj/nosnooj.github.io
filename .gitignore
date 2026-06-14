@@ -2,4 +2,12 @@ dist/
 __pycache__/
 *.pyc
 .venv/
+venv/
 .DS_Store
+
+# PyCharm / JetBrains
+.idea/
+*.iml
+*.iws
+.idea_modules/
+out/

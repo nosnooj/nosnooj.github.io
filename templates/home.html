@@ -5,6 +5,11 @@
   <!-- 표지 -->
   <section class="wrap">
     <div id="cover-stage">
+      {% if site.profile_photo %}
+      <div class="cover-photo"><img src="{{ root }}{{ site.profile_photo }}" alt="{{ site.name }}" width="720" height="960" decoding="async"></div>
+      {% else %}
+      <div class="cover-photo ph"><span>증명사진<br>3 × 4</span></div>
+      {% endif %}
       <div class="cover-kicker">{{ site.kicker }}</div>
       <h1 class="cover-name">{{ site.name }}</h1>
       <div class="cover-role">{{ site.role }}</div>
@@ -16,13 +21,18 @@
         {% endfor %}
       </div>
       <div class="cover-cta">
-        <a class="btn primary" href="#work-grid">프로젝트 보기 ↓</a>
-        {% if site.contacts.resume_pdf %}
-        <a class="btn" href="{{ root }}{{ site.contacts.resume_pdf }}" download>이력서 PDF ↓</a>
-        {% endif %}
-        <a class="btn" href="{{ site.contacts.github_url }}">GitHub</a>
+        <a class="btn primary" href="#work">프로젝트 보기 ↓</a>
+        {% for r in site.resumes %}
+        <details class="dl-menu up">
+          <summary class="btn alt">{{ r.label }} ▾</summary>
+          <div class="dl-pop">
+            <a href="{{ root }}{{ r.pdf }}" download="{{ r.pdfname }}">PDF ↓</a>
+            <a href="{{ root }}{{ r.docx }}" download="{{ r.docxname }}">Word ↓</a>
+          </div>
+        </details>
+        {% endfor %}
+        <a class="btn" href="{{ site.contacts.github_url }}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
       </div>
-      <a class="scroll-cue" href="#work-grid" aria-label="프로젝트로 스크롤">↓ scroll</a>
     </div>
   </section>
 
@@ -37,7 +47,7 @@
         <h3>{{ p.name }}</h3>
         <p>{{ p.card_one_liner }}</p>
         <div class="stack">{{ p.card_stack | join(" · ") }}</div>
-        <span class="go">→</span>
+        <span class="go">상세 보기 →</span>
       </a>
       {% endfor %}
     </div>
@@ -47,20 +57,24 @@
   <section class="wrap section" id="about">
     <div class="section-eyebrow">About</div>
 
-    <div class="about-block" id="about-lede">{{ site.about.lede }}</div>
+    <div class="about-block" id="about-lede">
+      <p>{{ site.about.lede }}</p>
+      {% if site.about.aspiration %}<p class="aspiration">{{ site.about.aspiration }}</p>{% endif %}
+    </div>
 
     <div class="about-block" id="about-career">
       <h3>경력</h3>
       {% for c in site.about.career %}
       <div class="exp">
         <div class="eh"><span class="mono">{{ c.period }}</span><b>{{ c.company }}</b><i>{{ c.role }}</i></div>
+        {% if c.scope %}<div class="scope">{{ c.scope }}</div>{% endif %}
         <ul>{% for pt in c.points %}<li>{{ pt }}</li>{% endfor %}</ul>
       </div>
       {% endfor %}
     </div>
 
     <div class="about-block" id="about-skills">
-      <h3>Skills</h3>
+      <h3>스킬</h3>
       {% for s in site.about.skills %}
       <div class="skill-row">
         <span class="lab">{{ s.label }}</span>
@@ -77,14 +91,14 @@
     </div>
 
     <div class="about-block" id="about-certs">
-      <h3>자격증 · 어학 (전체)</h3>
+      <h3>자격증 · 어학</h3>
       {% for c in site.about.certs %}
       <div class="cert"><span class="mono">{{ c.date }}</span><span>{{ c.title }} <span class="id">· {{ c.meta }}</span></span></div>
       {% endfor %}
     </div>
 
     <div class="about-block" id="about-etc">
-      <h3>수상 · 활동 · 병역 (전체)</h3>
+      <h3>수상 · 활동 · 병역</h3>
       {% for e in site.about.etc %}
       <div class="cert"><span class="mono">{{ e.date }}</span><span>{{ e.title }}{% if e.detail %}<br>{{ e.detail }}{% endif %}</span></div>
       {% endfor %}

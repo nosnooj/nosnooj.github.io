@@ -125,10 +125,13 @@ def build() -> None:
     site = content.SITE
     projects = content.PROJECTS
 
-    # 도면 인라인 (CS별 figures에 file 지정 시 로드)
+    # 도면 인라인 (CS별 figures + 본문 build_fig에 file 지정 시 로드)
     diagram_css_chunks: list[str] = []
     for proj in projects:
-        for fig in proj.get("figures", []):
+        figs = list(proj.get("figures", []))
+        if proj.get("build_fig"):
+            figs.append(proj["build_fig"])  # 본문(구현 섹션) 도면도 동일 변환
+        for fig in figs:
             if fig.get("file"):
                 svg_markup, css = inline_diagram(DIAGRAMS / fig["file"])
                 fig["svg"] = svg_markup
@@ -162,7 +165,7 @@ def build() -> None:
         (out_dir / "index.html").write_text(html, encoding="utf-8")
 
     # 정적 에셋 복사 (css, js, pdf) — diagrams는 인라인하므로 복사 생략 가능하나 보존
-    shutil.copytree(ASSETS, DIST / "assets")
+    shutil.copytree(ASSETS, DIST / "assets", ignore=shutil.ignore_patterns("diagrams"))
 
     # Jekyll 비활성 (밑줄 폴더/경로 보존)
     (DIST / ".nojekyll").write_text("", encoding="utf-8")
