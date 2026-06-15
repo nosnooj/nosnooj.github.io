@@ -22,15 +22,16 @@
       </div>
       <div class="cover-cta">
         <a class="btn primary" href="#work">프로젝트 보기 ↓</a>
-        {% for r in site.resumes %}
         <details class="dl-menu up">
-          <summary class="btn alt">{{ r.label }} ▾</summary>
+          <summary class="btn alt">이력서 ▾</summary>
           <div class="dl-pop">
+            {% for r in site.resumes %}
+            <span class="dl-group">{{ (r.label.split("·")|last)|trim }}</span>
             <a href="{{ root }}{{ r.pdf }}" download="{{ r.pdfname }}">PDF ↓</a>
             <a href="{{ root }}{{ r.docx }}" download="{{ r.docxname }}">Word ↓</a>
+            {% endfor %}
           </div>
         </details>
-        {% endfor %}
         <a class="btn" href="{{ site.contacts.github_url }}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
       </div>
     </div>
