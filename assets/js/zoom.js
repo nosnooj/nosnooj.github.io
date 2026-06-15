@@ -2,12 +2,15 @@
 // 확대(+)/축소(−)/원래대로(⤢)/닫기(✕), Esc·배경 클릭으로 닫힘, 휠로 확대/축소.
 // 인라인 SVG를 복제하므로 페이지 테마(data-theme) 색상이 그대로 유지된다.
 (function () {
-  var overlay, stage, scrollArea, scale = 1;
+  var overlay, stage, scrollArea, scale = 1, lastFocused;
 
   function ensure() {
     if (overlay) return;
     overlay = document.createElement("div");
     overlay.id = "lightbox";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-label", "도면 확대 보기");
     overlay.innerHTML =
       '<div class="lb-bar">' +
       '<span class="lb-cap"></span>' +
@@ -59,17 +62,26 @@
     var cap = fig.querySelector(".cap");
     overlay.querySelector(".lb-cap").textContent = cap ? cap.firstChild.textContent.trim() : "";
     setScale(1);
+    lastFocused = document.activeElement;
     overlay.classList.add("on");
     document.body.style.overflow = "hidden";
+    var closeBtn = overlay.querySelector(".lb-close");
+    if (closeBtn) closeBtn.focus();
   }
   function close() {
     if (!overlay) return;
     overlay.classList.remove("on");
     document.body.style.overflow = "";
+    if (lastFocused && lastFocused.focus) { lastFocused.focus(); lastFocused = null; }
   }
 
   document.addEventListener("click", function (e) {
     var fig = e.target.closest(".fig.zoomable");
+    if (fig) { e.preventDefault(); open(fig); }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    var fig = e.target.closest && e.target.closest(".fig.zoomable");
     if (fig) { e.preventDefault(); open(fig); }
   });
 })();

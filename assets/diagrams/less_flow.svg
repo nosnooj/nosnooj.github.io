@@ -1,5 +1,5 @@
 <svg viewBox="0 0 880 720" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans KR','Malgun Gothic','Segoe UI',Roboto,sans-serif" role="img" aria-labelledby="ttl desc">
-<title id="ttl">LESS 월 결산 연동 플로우</title>
+<title id="ttl">월 결산 연동 플로우</title>
 <desc id="desc">연동관리자가 월별로 수행하는 매출 취합·검증부터 ERP10 수주·생산지시 전송과 실패 재처리까지의 프로세스</desc>
 <style>svg{--bg:#FFFFFF; --ink:#16222E; --sub:#5B6B7B; --navy:#1B3A5B; --surface:#FFFFFF; --border:#C9D4DE; --appfill:#FBFCFE; --appborder:#C7D2DD; --header:#EEF3F8; --band:#F4F7FB; --ext:#F1F4F7; --extborder:#BAC4CE; --blue:#1D5FB4; --bluefill:#E8F0FB; --blueborder:#B7CEEC; --amber:#C77A12; --amberfill:#FCF5E8; --amberborder:#E7CF9F; --pillamber:#FBEED6; --pillnavy:#E4ECF4; --pillblue:#E1ECFB; --cylfill:#E2ECF9; --gray:#6B7280; --notefill:#F7F9FB; --warn:#C0392B;} @media (prefers-color-scheme:dark){svg{--bg:#0E1620; --ink:#E7EDF3; --sub:#9DAEBE; --navy:#86ABD4; --surface:#172331; --border:#34434F; --appfill:#131D29; --appborder:#33414E; --header:#1C2937; --band:#16212E; --ext:#1A2734; --extborder:#3A4856; --blue:#6FA6F2; --bluefill:#162840; --blueborder:#2F4D72; --amber:#E2AB52; --amberfill:#2A2417; --amberborder:#574828; --pillamber:#3A2D15; --pillnavy:#1E2F45; --pillblue:#172A45; --cylfill:#162840; --gray:#94A2B0; --notefill:#18242F; --warn:#E5736A;}}</style>
 <rect x="0" y="0" width="880" height="720" fill="var(--bg)"/>
@@ -10,7 +10,7 @@
 <marker id="a-gray" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2.4,4 Z" fill="var(--gray)"/></marker>
 <marker id="a-warn" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2.4,4 Z" fill="var(--warn)"/></marker>
 </defs>
-<text x="28" y="34" font-size="19" font-weight="700" fill="var(--navy)" text-anchor="start" >LESS — 월 결산 연동 플로우</text>
+<text x="28" y="34" font-size="19" font-weight="700" fill="var(--navy)" text-anchor="start" >월 결산 연동 플로우</text>
 <text x="28" y="55" font-size="11" font-weight="400" fill="var(--sub)" text-anchor="start" >연동관리자 월별 프로세스 · 매출 취합 → 검증 → ERP10 전송 → 실패 건 재처리</text>
 <rect x="276.0" y="74" width="180" height="26" rx="13.0" fill="var(--pillnavy)" stroke="var(--navy)" stroke-width="1"/>
 <text x="366.0" y="87.0" font-size="11" font-weight="700" fill="var(--navy)" text-anchor="middle"  dominant-baseline="middle">월초 결산 시작</text>

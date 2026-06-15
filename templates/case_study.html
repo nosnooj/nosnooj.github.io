@@ -17,7 +17,7 @@
   <article class="cs-hero">
     <div class="cs-figs">
       {% for fig in project.figures %}
-      <figure class="fig{% if fig.svg %} zoomable{% endif %}">
+      <figure class="fig{% if fig.svg %} zoomable{% endif %}"{% if fig.svg %} tabindex="0" role="button" aria-label="도면 크게 보기"{% endif %}>
         <figcaption class="cap">{{ fig.cap }}{% if fig.svg %}<span class="zoom-hint">⤢ 클릭하여 크게 보기</span>{% endif %}</figcaption>
         {% if fig.svg %}{{ fig.svg | safe }}{% else %}<div class="fig-slot">도면 SVG (제작 예정)</div>{% endif %}
       </figure>
@@ -51,7 +51,7 @@
       <section class="block" id="{{ project.id }}-build">
         <h2>구현</h2>
         {% if project.build_fig and project.build_fig.svg %}
-        <figure class="fig zoomable cs-build-fig">
+        <figure class="fig zoomable cs-build-fig" tabindex="0" role="button" aria-label="도면 크게 보기">
           <figcaption class="cap">{{ project.build_fig.cap }}<span class="zoom-hint">⤢ 클릭하여 크게 보기</span></figcaption>
           {{ project.build_fig.svg | safe }}
         </figure>

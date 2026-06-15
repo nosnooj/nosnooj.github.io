@@ -28,22 +28,22 @@ SITE = {
         "site": "nosnooj.github.io",
         "site_url": "https://nosnooj.github.io",
     },
-    "profile_photo": "assets/img/profile.jpg",   # 증명사진 1080x1440(3:4)
+    "profile_photo": "assets/img/profile.jpg",   # 증명사진 360x480(3:4)
     "resumes": [
-        {"label": "이력서 · 요약형", "short": "이력서(요약)",
-         "pdf": "assets/files/resume_summary.pdf", "pdfname": "손준혁_이력서_간결형.pdf",
-         "docx": "assets/files/resume_summary.docx", "docxname": "손준혁_이력서_간결형.docx"},
-        {"label": "이력서 · 상세형", "short": "이력서(상세)",
-         "pdf": "assets/files/resume_full.pdf", "pdfname": "손준혁_이력서.pdf",
-         "docx": "assets/files/resume_full.docx", "docxname": "손준혁_이력서.docx"},
+        # 메인 이력서 = 요약형(SUMMARY) → resume_summary.pdf
+        {"label": "이력서", "pdf": "assets/files/resume_summary.pdf",
+         "pdfname": "손준혁_이력서.pdf"},
+        # 경력기술서 = 상세(FULL) → resume_full.pdf
+        {"label": "경력기술서", "pdf": "assets/files/resume_full.pdf",
+         "pdfname": "손준혁_경력기술서.pdf"},
     ],
     # 표지 대표 정량 성과 — 이력서 SUMMARY 대표 성과와 동일 4종(0건·70%·46%·99.9%).
     # 95%(결과지 다운로드)는 추정치라 표지에서 제외, 상세는 CS1·경력에 유지.
     "metrics": [
-        {"value": "0건", "label": "운영 이관 오류"},
-        {"value": "70%", "label": "월 결산 처리 단축"},
-        {"value": "46%", "label": "인프라 비용 절감"},
-        {"value": "99.9%", "label": "시스템 가용성"},
+        {"value": "0건", "label": "데이터 이관 오류"},
+        {"value": "70%", "label": "ERP 월 결산 처리"},
+        {"value": "46%", "label": "AWS 인프라 비용"},
+        {"value": "99.9%", "label": "서비스 가용성"},
     ],
     "about": {
         "lede": (
@@ -154,10 +154,10 @@ SITE = {
 PROJECTS = [
     {
         "id": "cs1",
-        "slug": "lims",
+        "slug": "gaia",
         "code": "CS1",
         "accent": "teal",
-        "name": "Microarray LIMS · 결과지·모니터링 자동화",
+        "name": "Microarray LIMS · 결과지·모니터링 자동화 (GAIA)",
         "period": "2024.07 ~ 2025.09",
         "card_one_liner": "장비 연동부터 결과지 생성까지 단일 시스템화 — 이관 오류 0건",
         "card_stack": ["Java", "Spring", "MQTT", "WebSocket"],
@@ -168,7 +168,7 @@ PROJECTS = [
         },
         "figures": [
             {"cap": "FIG.A — 시스템 아키텍처",
-             "file": "cs1_arch.svg"},
+             "file": "gaia_arch.svg"},
         ],
         "glance": {
             "role": "팀장과 전체 설계 주도 · 수집·이관·판독·LIS 연동·결과지/모니터링 웹 개발",
@@ -176,7 +176,7 @@ PROJECTS = [
             "stack": ["Java", "Spring Boot", "Spring Security", "MQTT", "WebSocket",
                       "CompletableFuture", "Azure OAuth2", "AOP", "Thymeleaf", "MySQL",
                       "MS SQL Server", "Crownix Report(ClipSoft)"],
-            "key_result": "수작업 파일 이관·점검 제거, 운영 이관 오류 0건",
+            "key_result": "수작업 파일 이관·점검 제거, 데이터 이관 오류 0건",
         },
         "problem": (
             "유전자 검사 장비를 새로 도입하면서 그 데이터를 다룰 LIMS를 처음부터 설계·구축한 "
@@ -240,7 +240,7 @@ PROJECTS = [
         ],
         "result": {
             "metrics": [
-                {"value": "0건", "label": "운영 이관 오류"},
+                {"value": "0건", "label": "데이터 이관 오류"},
                 {"value": "25~30→5분", "label": "대용량 결과 이관"},
                 {"value": "약 95%↓", "label": "결과지 일괄 다운로드"},
                 {"value": "즉시 식별", "label": "특이 소견"},
@@ -261,10 +261,10 @@ PROJECTS = [
             "sub": "랩지노믹스 IT팀 · LIS–ERP10 매출 연동 플랫폼",
         },
         "figures": [
-            {"cap": "FIG.A — 시스템 아키텍처", "file": "cs2_arch.svg"},
+            {"cap": "FIG.A — 시스템 아키텍처", "file": "less_arch.svg"},
         ],
         "build_fig": {"cap": "FIG.B — 월 결산 연동 플로우 (연동관리자 월별 프로세스)",
-                      "file": "cs2_flow.svg"},
+                      "file": "less_flow.svg"},
         "glance": {
             "role": "3인 팀(팀원) · 담당 검사·매출 분야 풀스택 구현 · 전체 아키텍처 팀 공동 설계",
             "period": "2024.04 – 2024.10",
@@ -349,7 +349,7 @@ PROJECTS = [
             "sub": "랩지노믹스 IT팀 · 온프레미스 → AWS VPC 다중 AZ 전환",
         },
         "figures": [
-            {"cap": "FIG.A — AWS VPC 다중 AZ 아키텍처", "file": "cs3_aws_arch.svg"},
+            {"cap": "FIG.A — AWS VPC 다중 AZ 아키텍처", "file": "aws_arch.svg"},
         ],
         "glance": {
             "role": "전환 아키텍처 설계·구축 주도 · 네트워크·보안·이중화·스토리지 전 구간",
@@ -432,7 +432,7 @@ PROJECTS = [
             "sub": "랩지노믹스 IT팀 · B2B 유전체 주문·정산 백오피스",
         },
         "figures": [
-            {"cap": "FIG.A — 주문 → 정산 데이터 플로우", "file": "cs4_cos_flow.svg"},
+            {"cap": "FIG.A — 주문 → 정산 데이터 플로우", "file": "cos_flow.svg"},
         ],
         "glance": {
             "role": "기획 2·개발 1의 3인 프로젝트 · 주문·정산·회계 백엔드·프런트엔드 단독 구현",
@@ -510,7 +510,7 @@ PROJECTS = [
             "sub": "제노코어비에스 AI분석개발팀 · B2C 맞춤 영양제 추천·보험 상담 연계",
         },
         "figures": [
-            {"cap": "FIG.A — 추천 · 결제 · 리포트 데이터 플로우", "file": "cs5_ib_flow.svg"},
+            {"cap": "FIG.A — 추천 · 결제 · 리포트 데이터 플로우", "file": "ib_flow.svg"},
         ],
         "glance": {
             "role": "플랫폼 API 연동·백오피스·결제 구축 담당 · 추천·리포트 자동화 연계",

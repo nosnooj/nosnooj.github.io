@@ -9,6 +9,7 @@
 <meta property="og:description" content="{{ self.description() }}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ site.contacts.site_url }}{% block og_path %}/{% endblock %}">
+<link rel="canonical" href="{{ site.contacts.site_url }}{{ self.og_path() }}">
 <meta property="og:image" content="{{ site.contacts.site_url }}/{{ site.profile_photo }}">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="{{ site.contacts.site_url }}/{{ site.profile_photo }}">
@@ -32,6 +33,7 @@
 </head>
 <body>
 
+<a class="skip" href="#main">본문 바로가기</a>
 <header id="topbar">
   <a class="logo" href="{{ root }}">nosnooj<span>.github.io</span></a>
   <nav>
@@ -45,9 +47,7 @@
       <summary class="btn alt">이력서 ▾</summary>
       <div class="dl-pop">
         {% for r in site.resumes %}
-        <span class="dl-group">{{ (r.label.split("·")|last)|trim }}</span>
-        <a href="{{ root }}{{ r.pdf }}" download="{{ r.pdfname }}">PDF ↓</a>
-        <a href="{{ root }}{{ r.docx }}" download="{{ r.docxname }}">Word ↓</a>
+        <a href="{{ root }}{{ r.pdf }}" download="{{ r.pdfname }}">{{ r.label }} ↓</a>
         {% endfor %}
       </div>
     </details>
@@ -55,6 +55,7 @@
   </div>
 </header>
 
+<a id="main" tabindex="-1"></a>
 {% block content %}{% endblock %}
 
 <footer id="footer">

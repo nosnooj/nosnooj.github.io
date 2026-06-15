@@ -3,6 +3,10 @@
 손준혁 · 백엔드 개발자 · 데이터 흐름 설계.
 콘텐츠를 단일 소스로 모델링하고 템플릿으로 결정론적 빌드하는 경량 정적 사이트입니다.
 
+**라이브:** https://nosnooj.github.io
+
+라이트/다크 토글, 모바일 반응형, 케이스 스터디 도면 라이트박스(확대 보기), 이력서 PDF·Word 다운로드를 제공합니다.
+
 ## 설계 원칙
 
 - **콘텐츠 단일 소스** — 모든 페이지는 `data/content.py` 한 곳에서만 데이터를 읽습니다. 문구·성과 수정은 이 파일만 고치면 전 페이지에 반영됩니다.
@@ -23,11 +27,13 @@ portfolio/
 ├── assets/
 │   ├── css/style.css            # 블루프린트 테마 토큰 (라이트/다크)
 │   ├── js/theme.js              # 테마 토글(localStorage 영속)
+│   ├── js/zoom.js               # 도면 라이트박스(확대 보기)
 │   ├── diagrams/                # 케이스 스터디 SVG 도면 (빌드 시 HTML 인라인)
 │   ├── img/profile.jpg          # 증명사진
 │   └── files/                   # 이력서 PDF·DOCX (다운로드 대상)
 ├── requirements.txt
-└── .github/workflows/deploy.yml # push → 빌드 → Pages 자동 배포
+├── dev.sh                       # 빌드 + 로컬 미리보기 서버
+└── .github/workflows/deploy.yml # main push → 빌드 → Pages 자동 배포
 ```
 
 ## 라우트
@@ -35,7 +41,7 @@ portfolio/
 | 경로 | 페이지 |
 |---|---|
 | `/` | 표지 + Work 인덱스 + About (스크롤) |
-| `/work/lims/` | CS1 — Microarray LIMS · 결과지 자동화 |
+| `/work/gaia/` | CS1 — Microarray LIMS · 결과지 자동화 (GAIA) |
 | `/work/less/` | CS2 — LIS–ERP 연동 (LESS) |
 | `/work/aws/` | CS3 — 온프레미스 → AWS 전환 |
 | `/work/cos/` | CS4 — B2B 주문·정산 (COS) |
@@ -62,11 +68,11 @@ git checkout develop
 git add -A && git commit -m "작업 내용"
 git push                 # develop 백업 (배포 안 됨)
 
-# 배포
-git checkout main
-git merge develop
-git push                 # → Actions 자동 배포
+# 배포: develop → main PR(Squash & merge) → Actions 자동 배포
+# 머지 후 develop를 main에 재정렬
 git checkout develop
+git reset --hard main
+git push --force-with-lease
 ```
 
 ## 배포

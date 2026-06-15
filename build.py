@@ -165,10 +165,22 @@ def build() -> None:
         (out_dir / "index.html").write_text(html, encoding="utf-8")
 
     # 정적 에셋 복사 (css, js, pdf) — diagrams는 인라인하므로 복사 생략 가능하나 보존
-    shutil.copytree(ASSETS, DIST / "assets", ignore=shutil.ignore_patterns("diagrams"))
+    shutil.copytree(ASSETS, DIST / "assets",
+                    ignore=shutil.ignore_patterns("diagrams", "*.docx", "~$*", ".DS_Store"))
 
     # Jekyll 비활성 (밑줄 폴더/경로 보존)
     (DIST / ".nojekyll").write_text("", encoding="utf-8")
+
+    # SEO: sitemap.xml + robots.txt (결정론적 — lastmod 없음)
+    base_url = site["contacts"]["site_url"].rstrip("/")
+    locs = ["/"] + [f"/work/{p['slug']}/" for p in projects]
+    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
+               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    sitemap += [f"  <url><loc>{base_url}{loc}</loc></url>" for loc in locs]
+    sitemap.append("</urlset>")
+    (DIST / "sitemap.xml").write_text("\n".join(sitemap) + "\n", encoding="utf-8")
+    (DIST / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\nSitemap: {base_url}/sitemap.xml\n", encoding="utf-8")
 
     pages = ["index.html"] + [f"work/{p['slug']}/index.html" for p in projects]
     print(f"빌드 완료 → {DIST}")

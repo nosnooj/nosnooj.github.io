@@ -6,7 +6,7 @@
   <section class="wrap">
     <div id="cover-stage">
       {% if site.profile_photo %}
-      <div class="cover-photo"><img src="{{ root }}{{ site.profile_photo }}" alt="{{ site.name }}" width="720" height="960" decoding="async"></div>
+      <div class="cover-photo"><img src="{{ root }}{{ site.profile_photo }}" alt="{{ site.name }}" width="360" height="480" decoding="async"></div>
       {% else %}
       <div class="cover-photo ph"><span>증명사진<br>3 × 4</span></div>
       {% endif %}
@@ -26,9 +26,7 @@
           <summary class="btn alt">이력서 ▾</summary>
           <div class="dl-pop">
             {% for r in site.resumes %}
-            <span class="dl-group">{{ (r.label.split("·")|last)|trim }}</span>
-            <a href="{{ root }}{{ r.pdf }}" download="{{ r.pdfname }}">PDF ↓</a>
-            <a href="{{ root }}{{ r.docx }}" download="{{ r.docxname }}">Word ↓</a>
+            <a href="{{ root }}{{ r.pdf }}" download="{{ r.pdfname }}">{{ r.label }} ↓</a>
             {% endfor %}
           </div>
         </details>
