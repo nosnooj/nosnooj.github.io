@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="light">
+<html lang="ko" data-theme="light" data-lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}{{ site.name }} — 백엔드 개발자 포트폴리오{% endblock %}</title>
-<meta name="description" content="{% block description %}{{ site.name }} · {{ site.role }}. 장비 연동·결제·ERP·인프라까지 데이터 흐름을 설계하는 백엔드 개발자.{% endblock %}">
+<title>{% block title %}{{ site.name.ko }} · {{ site.name.en }} — 백엔드 개발자 포트폴리오{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ site.name.ko }} · {{ site.role.ko }}. 장비 연동·결제·ERP·인프라까지 데이터 흐름을 설계하는 백엔드 개발자.{% endblock %}">
 <meta property="og:title" content="{{ self.title() }}">
 <meta property="og:description" content="{{ self.description() }}">
 <meta property="og:type" content="website">
@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="{{ root }}assets/css/style.css">
 {% if diagram_css %}<style id="diagram-vars">{{ diagram_css | safe }}</style>{% endif %}
 <script>
-/* FOUC 방지: 페인트 전에 테마 확정 (저장값 → OS 설정 순) */
+/* FOUC 방지: 페인트 전에 테마·언어 확정 (저장값 → OS/브라우저 설정 순) */
 (function(){
   try {
     var saved = localStorage.getItem("theme");
@@ -28,30 +28,42 @@
                      : matchMedia("(prefers-color-scheme: dark)").matches;
     document.documentElement.dataset.theme = dark ? "dark" : "light";
   } catch (e) {}
+  try {
+    var lang = localStorage.getItem("lang");
+    if (lang !== "ko" && lang !== "en") {
+      // 저장된 선택이 없으면 브라우저 언어로 결정 — 한국어면 ko, 그 외에는 모두 en
+      lang = (navigator.language || "").toLowerCase().slice(0, 2) === "ko" ? "ko" : "en";
+    }
+    var root = document.documentElement;
+    root.dataset.lang = lang;
+    root.setAttribute("lang", lang);
+  } catch (e) {}
 })();
 </script>
 </head>
 <body>
 
-<a class="skip" href="#main">본문 바로가기</a>
+<a class="skip" href="#main"><span class="i ko">본문 바로가기</span><span class="i en">Skip to content</span></a>
 <header id="topbar">
   <a class="logo" href="{{ root }}">nosnooj<span>.github.io</span></a>
   <nav>
-    <a href="{{ root }}">홈</a>
+    <a href="{{ root }}">{{ tt("홈", "Home") }}</a>
     <a href="{{ root }}#work">Work</a>
     <a href="{{ root }}#about">About</a>
     <a href="{{ site.contacts.github_url }}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
   </nav>
   <div class="right">
     <details class="dl-menu">
-      <summary class="btn alt">이력서 ▾</summary>
+      <summary class="btn alt">{{ tt("이력서", "Resume") }} ▾</summary>
       <div class="dl-pop">
         {% for r in site.resumes %}
-        <a href="{{ root }}{{ r.pdf }}" download="{{ r.pdfname }}">{{ r.label }} ↓</a>
+        <a class="i ko" href="{{ root }}{{ r.pdf }}" download="{{ r.pdfname }}">{{ r.label.ko }} ↓</a>
+        <a class="i en" href="{{ root }}{{ r.pdf_en }}" download="{{ r.pdfname_en }}">{{ r.label.en }} ↓</a>
         {% endfor %}
       </div>
     </details>
-    <button class="btn icon" type="button" onclick="toggleTheme()" aria-label="라이트/다크 전환">◐</button>
+    <button class="btn lang-btn" type="button" onclick="toggleLang()" aria-label="언어 전환 / Switch language"><span class="i ko">EN</span><span class="i en">KO</span></button>
+    <button class="btn icon" type="button" onclick="toggleTheme()" aria-label="라이트/다크 전환 / Toggle theme">◐</button>
   </div>
 </header>
 
@@ -60,7 +72,7 @@
 
 <footer id="footer">
   <div class="wrap foot-inner">
-    <span>© 2026 {{ site.name }} — {{ site.role }}</span>
+    <span>© 2026 {{ site.name | t }} — {{ site.role | t }}</span>
     <span class="mono">
       <a href="{{ site.contacts.github_url }}" target="_blank" rel="noopener noreferrer">{{ site.contacts.github }}</a>
       · {{ site.contacts.email }}

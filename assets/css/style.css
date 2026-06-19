@@ -13,6 +13,16 @@
   --c-amber:#E0A93E; --c-coral:#E8896B; --c-purple:#A99BE0; --c-slate:#9AA8BC;
 }
 
+/* 브랜드 색 — 언어로 전환: 국문=네이비 / 영문=틸 (라이트/다크 축과 독립) */
+html[data-lang="ko"]{--brand:var(--c-navy)}
+html[data-lang="en"]{--brand:var(--c-teal)}
+
+/* 이중언어 표시 — 활성 언어만 노출 */
+html[data-lang="ko"] .i.en{display:none}
+html[data-lang="en"] .i.ko{display:none}
+.dgm{display:block}
+.lang-btn{min-width:42px;text-align:center;font-family:ui-monospace,monospace;font-weight:600}
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 body{margin:0;font-family:"Pretendard Variable",Pretendard,-apple-system,"Segoe UI","Malgun Gothic",sans-serif;
@@ -20,34 +30,34 @@ body{margin:0;font-family:"Pretendard Variable",Pretendard,-apple-system,"Segoe 
 .mono{font-family:ui-monospace,"SF Mono",Consolas,monospace}
 a{color:inherit}
 .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
-.skip{position:absolute;left:8px;top:-44px;z-index:60;background:var(--c-navy);color:var(--inv);padding:8px 14px;border-radius:var(--r-sm);font-size:13px;text-decoration:none;transition:top .15s}
+.skip{position:absolute;left:8px;top:-44px;z-index:60;background:var(--brand);color:var(--inv);padding:8px 14px;border-radius:var(--r-sm);font-size:13px;text-decoration:none;transition:top .15s}
 .skip:focus{top:8px}
 
 /* ---------- topbar ---------- */
 #topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:16px;padding:11px 22px;
   background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line)}
-#topbar .logo{font-family:ui-monospace,monospace;font-weight:700;color:var(--c-navy);font-size:14px;text-decoration:none}
+#topbar .logo{font-family:ui-monospace,monospace;font-weight:700;color:var(--brand);font-size:14px;text-decoration:none}
 #topbar .logo span{color:var(--sub);font-weight:400}
 #topbar nav{display:flex;gap:4px;margin-left:6px}
 #topbar nav a{color:var(--text);text-decoration:none;font-size:13px;padding:5px 11px;border-radius:var(--r-sm)}
-#topbar nav a:hover{background:color-mix(in srgb,var(--c-navy) 9%,transparent)}
+#topbar nav a:hover{background:color-mix(in srgb,var(--brand) 9%,transparent)}
 #topbar .right{margin-left:auto;display:flex;gap:8px;align-items:center}
 .btn{font-size:12.5px;padding:6px 12px;border-radius:var(--r-sm);border:1px solid var(--line);
   background:var(--surface);color:var(--text);cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block}
-.btn:hover{border-color:color-mix(in srgb,var(--c-navy) 45%,var(--line))}
-.btn.primary{background:var(--c-navy);color:var(--inv);border-color:var(--c-navy)}
+.btn:hover{border-color:color-mix(in srgb,var(--brand) 45%,var(--line))}
+.btn.primary{background:var(--brand);color:var(--inv);border-color:var(--brand)}
 .btn.icon{padding:6px 10px;font-size:14px;line-height:1}
-.btn.alt{background:color-mix(in srgb,var(--c-navy) 12%,var(--surface));color:var(--c-navy);border-color:color-mix(in srgb,var(--c-navy) 38%,var(--line));font-weight:600}
-.btn.alt:hover{background:color-mix(in srgb,var(--c-navy) 20%,var(--surface));border-color:var(--c-navy)}
+.btn.alt{background:color-mix(in srgb,var(--brand) 12%,var(--surface));color:var(--brand);border-color:color-mix(in srgb,var(--brand) 38%,var(--line));font-weight:600}
+.btn.alt:hover{background:color-mix(in srgb,var(--brand) 20%,var(--surface));border-color:var(--brand)}
 
 /* ============================================================
    홈 — 표지 + Work + About
    ============================================================ */
-#home{--acc:var(--c-navy)}
+#home{--acc:var(--brand)}
 .section{margin:34px auto}
 
-#cover-stage{--acc:var(--c-navy);position:relative;overflow:hidden;margin-top:26px;
+#cover-stage{--acc:var(--brand);position:relative;overflow:hidden;margin-top:26px;
   background:color-mix(in srgb,var(--acc) 6%,var(--surface));
   border:1px solid color-mix(in srgb,var(--acc) 26%,var(--line));border-radius:var(--r-lg);
   padding:54px 44px 34px;min-height:340px;display:flex;flex-direction:column}
@@ -70,7 +80,7 @@ a{color:inherit}
 .dl-pop{position:absolute;top:calc(100% + 5px);left:0;z-index:40;display:flex;flex-direction:column;min-width:100%;
   background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);box-shadow:0 8px 24px rgba(0,0,0,.14);overflow:hidden}
 .dl-pop a{padding:8px 16px;font-size:12.5px;color:var(--text);text-decoration:none;white-space:nowrap}
-.dl-pop a:hover{background:color-mix(in srgb,var(--c-navy) 10%,transparent)}
+.dl-pop a:hover{background:color-mix(in srgb,var(--brand) 10%,transparent)}
 .dl-menu.up .dl-pop{top:auto;bottom:calc(100% + 5px)}
 .cover-photo{position:absolute;top:54px;right:44px;width:150px;aspect-ratio:3/4;z-index:2;
   border-radius:var(--r-md);overflow:hidden;background:var(--surface);
@@ -90,7 +100,7 @@ a{color:inherit}
 }
 
 #work-intro{font-size:15px;max-width:680px;margin:0 0 16px}
-.section-eyebrow{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.12em;color:var(--c-navy);
+.section-eyebrow{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.12em;color:var(--brand);
   text-transform:uppercase;margin-bottom:6px}
 #work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .wcard{position:relative;border:1px solid var(--line);border-top:3px solid var(--acc);border-radius:var(--r-md);
@@ -112,14 +122,14 @@ a{color:inherit}
 #work-grid .wcard:nth-child(5){--acc:var(--c-purple)}
 
 /* ---------- About ---------- */
-#about{--acc:var(--c-navy)}
+#about{--acc:var(--brand)}
 .about-block{position:relative;border:1px solid var(--line);border-left:3px solid var(--acc);
   border-radius:0 var(--r-md) var(--r-md) 0;background:var(--surface);padding:16px 20px;margin:14px 0}
 .about-block h3{margin:0 0 10px;font-size:15px;color:var(--acc)}
 #about-lede{font-size:14.5px;line-height:1.8}
 #about-lede p{margin:0}
 #about-lede .aspiration{margin-top:12px;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--acc) 18%,var(--line));color:var(--acc);font-weight:500}
-#about-career{--acc:var(--c-navy)} #about-skills{--acc:var(--c-green)}
+#about-career{--acc:var(--brand)} #about-skills{--acc:var(--c-green)}
 #about-education{--acc:var(--c-blue)} #about-certs{--acc:var(--c-amber)} #about-etc{--acc:var(--c-slate)}
 .exp{margin:12px 0 16px}
 .exp .eh{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
@@ -178,7 +188,7 @@ a{color:inherit}
 .lb-actions{display:flex;gap:6px;flex:0 0 auto}
 .lb-btn{width:34px;height:34px;border:1px solid var(--line);background:var(--surface);color:var(--text);
   border-radius:var(--r-sm);font-size:16px;line-height:1;cursor:pointer;font-family:inherit}
-.lb-btn:hover{border-color:color-mix(in srgb,var(--c-navy) 45%,var(--line));background:color-mix(in srgb,var(--c-navy) 8%,var(--surface))}
+.lb-btn:hover{border-color:color-mix(in srgb,var(--brand) 45%,var(--line));background:color-mix(in srgb,var(--brand) 8%,var(--surface))}
 .lb-close{margin-left:6px}
 .lb-scroll{flex:1;overflow:auto;padding:24px;display:flex;justify-content:center;align-items:flex-start}
 .lb-stage{width:100%;flex:0 0 auto;transition:width .12s ease}
@@ -244,7 +254,7 @@ details.mod li{font-size:13px;color:var(--sub);margin:5px 0;line-height:1.6}
 .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
   padding:18px 22px 32px;font-size:12px;color:var(--sub)}
 .foot-inner a{color:var(--sub);text-decoration:none}
-.foot-inner a:hover{color:var(--c-navy)}
+.foot-inner a:hover{color:var(--brand)}
 
 /* ---------- 반응형 ---------- */
 @media (max-width:860px){

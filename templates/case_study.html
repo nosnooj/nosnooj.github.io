@@ -1,32 +1,35 @@
 {% extends "base.html" %}
-{% block title %}{{ project.name }} — {{ site.name }} 포트폴리오{% endblock %}
-{% block description %}{{ project.hero.title }}. {{ project.glance.key_result }}{% endblock %}
+{% block title %}{{ project.name.ko }} · {{ project.name.en }} — {{ site.name.ko }} 포트폴리오{% endblock %}
+{% block description %}{{ project.hero.title.ko }}. {{ project.glance.key_result.ko }}{% endblock %}
 {% block og_path %}/work/{{ project.slug }}/{% endblock %}
 
 {% block content %}
 <main class="wrap cs" id="page-{{ project.id }}" style="--acc:var(--c-{{ project.accent }})">
 
   <div class="cs-top">
-    <a class="cs-back" href="{{ root }}#work">← 프로젝트 목록</a>
+    <a class="cs-back" href="{{ root }}#work">{{ tt("← 프로젝트 목록", "← All projects") }}</a>
     <span class="cs-pager">
-      {% if prev %}<a href="{{ root }}work/{{ prev.slug }}/">← 이전 {{ prev.code }}</a>{% endif %}
-      {% if next %}<a href="{{ root }}work/{{ next.slug }}/">다음 {{ next.code }} →</a>{% endif %}
+      {% if prev %}<a href="{{ root }}work/{{ prev.slug }}/">{{ tt("← 이전 " ~ prev.code, "← Prev " ~ prev.code) }}</a>{% endif %}
+      {% if next %}<a href="{{ root }}work/{{ next.slug }}/">{{ tt("다음 " ~ next.code ~ " →", "Next " ~ next.code ~ " →") }}</a>{% endif %}
     </span>
   </div>
 
   <article class="cs-hero">
     <div class="cs-figs">
       {% for fig in project.figures %}
-      <figure class="fig{% if fig.svg %} zoomable{% endif %}"{% if fig.svg %} tabindex="0" role="button" aria-label="도면 크게 보기"{% endif %}>
-        <figcaption class="cap">{{ fig.cap }}{% if fig.svg %}<span class="zoom-hint">⤢ 클릭하여 크게 보기</span>{% endif %}</figcaption>
-        {% if fig.svg %}{{ fig.svg | safe }}{% else %}<div class="fig-slot">도면 SVG (제작 예정)</div>{% endif %}
+      <figure class="fig{% if fig.svg %} zoomable{% endif %}"{% if fig.svg %} tabindex="0" role="button" aria-label="도면 크게 보기 / Enlarge diagram"{% endif %}>
+        <figcaption class="cap">{{ fig.cap | t }}{% if fig.svg %}<span class="zoom-hint">{{ tt("⤢ 클릭하여 크게 보기", "⤢ Click to enlarge") }}</span>{% endif %}</figcaption>
+        {% if fig.svg %}
+        <span class="dgm i ko">{{ fig.svg | safe }}</span>
+        <span class="dgm i en">{{ (fig.svg_en or fig.svg) | safe }}</span>
+        {% else %}<div class="fig-slot">{{ tt("도면 SVG (제작 예정)", "Diagram SVG (planned)") }}</div>{% endif %}
       </figure>
       {% endfor %}
     </div>
     <div class="head">
       <div class="kicker">{{ project.hero.kicker }}</div>
-      <h1>{{ project.hero.title }}</h1>
-      <div class="sub">{{ project.hero.sub }}</div>
+      <h1>{{ project.hero.title | t }}</h1>
+      <div class="sub">{{ project.hero.sub | t }}</div>
     </div>
   </article>
 
@@ -34,66 +37,67 @@
     <div class="cs-main">
 
       <section class="block" id="{{ project.id }}-problem">
-        <h2>문제</h2>
-        {% if project.problem %}<p>{{ project.problem }}</p>
-        {% else %}<div class="wip">이력서 {{ project.code }} 작성 후 채울 예정입니다.</div>{% endif %}
+        <h2>{{ tt("문제", "Problem") }}</h2>
+        {% if project.problem %}<p>{{ project.problem | t }}</p>
+        {% else %}<div class="wip">{{ tt("이력서 " ~ project.code ~ " 작성 후 채울 예정입니다.", "To be written.") }}</div>{% endif %}
       </section>
 
       <section class="block callout" id="{{ project.id }}-decisions">
-        <h2>설계 결정</h2>
+        <h2>{{ tt("설계 결정", "Design decisions") }}</h2>
         {% if project.decisions %}
           {% for d in project.decisions %}
-          <div class="decision"><b>{{ d.head }}</b><span>{{ d.body }}</span></div>
+          <div class="decision"><b>{{ d.head | t }}</b><span>{{ d.body | t }}</span></div>
           {% endfor %}
-        {% else %}<div class="wip">이력서 {{ project.code }} 작성 후 채울 예정입니다.</div>{% endif %}
+        {% else %}<div class="wip">{{ tt("이력서 " ~ project.code ~ " 작성 후 채울 예정입니다.", "To be written.") }}</div>{% endif %}
       </section>
 
       <section class="block" id="{{ project.id }}-build">
-        <h2>구현</h2>
+        <h2>{{ tt("구현", "Build") }}</h2>
         {% if project.build_fig and project.build_fig.svg %}
-        <figure class="fig zoomable cs-build-fig" tabindex="0" role="button" aria-label="도면 크게 보기">
-          <figcaption class="cap">{{ project.build_fig.cap }}<span class="zoom-hint">⤢ 클릭하여 크게 보기</span></figcaption>
-          {{ project.build_fig.svg | safe }}
+        <figure class="fig zoomable cs-build-fig" tabindex="0" role="button" aria-label="도면 크게 보기 / Enlarge diagram">
+          <figcaption class="cap">{{ project.build_fig.cap | t }}<span class="zoom-hint">{{ tt("⤢ 클릭하여 크게 보기", "⤢ Click to enlarge") }}</span></figcaption>
+          <span class="dgm i ko">{{ project.build_fig.svg | safe }}</span>
+          <span class="dgm i en">{{ (project.build_fig.svg_en or project.build_fig.svg) | safe }}</span>
         </figure>
         {% endif %}
         {% if project.build %}
           {% for mod in project.build %}
           <details class="mod" open>
-            <summary><span class="arr">▸</span><span>{{ mod.module }}</span></summary>
-            <ul>{% for pt in mod.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+            <summary><span class="arr">▸</span><span>{{ mod.module | t }}</span></summary>
+            <ul>{% for pt in mod.points %}<li>{{ pt | t }}</li>{% endfor %}</ul>
           </details>
           {% endfor %}
-        {% else %}<div class="wip">모듈별 구현 상세는 이력서 {{ project.code }} 작성 후 채웁니다.</div>{% endif %}
+        {% else %}<div class="wip">{{ tt("모듈별 구현 상세는 이력서 " ~ project.code ~ " 작성 후 채웁니다.", "To be written.") }}</div>{% endif %}
       </section>
 
     </div>
 
     <aside class="cs-aside">
       <dl class="glance" id="{{ project.id }}-glance">
-        <dt>역할</dt><dd>{{ project.glance.role }}</dd>
-        <dt>기간</dt><dd>{{ project.glance.period }}</dd>
-        <dt>스택</dt><dd><div class="chips">{% for s in project.glance.stack %}<span>{{ s }}</span>{% endfor %}</div></dd>
-        <dt>핵심 성과</dt><dd>{{ project.glance.key_result }}</dd>
+        <dt>{{ tt("역할", "Role") }}</dt><dd>{{ project.glance.role | t }}</dd>
+        <dt>{{ tt("기간", "Period") }}</dt><dd>{{ project.glance.period | t }}</dd>
+        <dt>{{ tt("스택", "Stack") }}</dt><dd><div class="chips">{% for s in project.glance.stack %}<span>{{ s | t }}</span>{% endfor %}</div></dd>
+        <dt>{{ tt("핵심 성과", "Key result") }}</dt><dd>{{ project.glance.key_result | t }}</dd>
       </dl>
 
       <section class="block" id="{{ project.id }}-result">
-        <h2>성과</h2>
+        <h2>{{ tt("성과", "Results") }}</h2>
         {% if project.result.metrics %}
           <div class="metrics{% if project.result.metrics|length <= 2 %} stack{% endif %}">
             {% for m in project.result.metrics %}
-            <div class="metric"><b>{{ m.value }}</b><i>{{ m.label }}</i></div>
+            <div class="metric"><b>{{ m.value | t }}</b><i>{{ m.label | t }}</i></div>
             {% endfor %}
           </div>
-          {% if project.result.retro %}<p class="retro">“{{ project.result.retro }}”</p>{% endif %}
-        {% else %}<div class="wip">성과 지표는 이력서 {{ project.code }} 작성 후 확정합니다.</div>{% endif %}
+          {% if project.result.retro %}<p class="retro">“{{ project.result.retro | t }}”</p>{% endif %}
+        {% else %}<div class="wip">{{ tt("성과 지표는 이력서 " ~ project.code ~ " 작성 후 확정합니다.", "To be written.") }}</div>{% endif %}
       </section>
     </aside>
   </div>
 
   <nav class="cs-nav">
-    {% if prev %}<a href="{{ root }}work/{{ prev.slug }}/">← 이전: {{ prev.code }}</a>{% else %}<span class="disabled">← 이전</span>{% endif %}
-    <a href="{{ root }}#work">프로젝트 목록</a>
-    {% if next %}<a href="{{ root }}work/{{ next.slug }}/">다음: {{ next.code }} →</a>{% else %}<span class="disabled">다음 →</span>{% endif %}
+    {% if prev %}<a href="{{ root }}work/{{ prev.slug }}/">{{ tt("← 이전: " ~ prev.code, "← Prev: " ~ prev.code) }}</a>{% else %}<span class="disabled">{{ tt("← 이전", "← Prev") }}</span>{% endif %}
+    <a href="{{ root }}#work">{{ tt("프로젝트 목록", "All projects") }}</a>
+    {% if next %}<a href="{{ root }}work/{{ next.slug }}/">{{ tt("다음: " ~ next.code ~ " →", "Next: " ~ next.code ~ " →") }}</a>{% else %}<span class="disabled">{{ tt("다음 →", "Next →") }}</span>{% endif %}
   </nav>
 
 </main>

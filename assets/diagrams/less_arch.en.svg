@@ -1,0 +1,101 @@
+<svg viewBox="0 0 880 804" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans KR','Malgun Gothic','Segoe UI',Roboto,sans-serif" role="img" aria-labelledby="ttl desc">
+<title id="ttl">LIS–ERP Integration Platform System Architecture</title>
+<desc id="desc">Layered structure and data flow of a Strategy-pattern, Multi-DataSource, WebFlux-based LIS↔ERP10 integration web platform</desc>
+<style>svg{--bg:#FFFFFF; --ink:#16222E; --sub:#5B6B7B; --navy:#1B3A5B; --surface:#FFFFFF; --border:#C9D4DE; --appfill:#FBFCFE; --appborder:#C7D2DD; --header:#EEF3F8; --band:#F4F7FB; --ext:#F1F4F7; --extborder:#BAC4CE; --blue:#1D5FB4; --bluefill:#E8F0FB; --blueborder:#B7CEEC; --amber:#C77A12; --amberfill:#FCF5E8; --amberborder:#E7CF9F; --pillamber:#FBEED6; --pillnavy:#E4ECF4; --pillblue:#E1ECFB; --cylfill:#E2ECF9; --gray:#6B7280; --notefill:#F7F9FB; --warn:#C0392B;} @media (prefers-color-scheme:dark){svg{--bg:#0E1620; --ink:#E7EDF3; --sub:#9DAEBE; --navy:#86ABD4; --surface:#172331; --border:#34434F; --appfill:#131D29; --appborder:#33414E; --header:#1C2937; --band:#16212E; --ext:#1A2734; --extborder:#3A4856; --blue:#6FA6F2; --bluefill:#162840; --blueborder:#2F4D72; --amber:#E2AB52; --amberfill:#2A2417; --amberborder:#574828; --pillamber:#3A2D15; --pillnavy:#1E2F45; --pillblue:#172A45; --cylfill:#162840; --gray:#94A2B0; --notefill:#18242F; --warn:#E5736A;}}</style>
+<rect x="0" y="0" width="880" height="804" fill="var(--bg)"/>
+<defs>
+<marker id="a-navy" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2.4,4 Z" fill="var(--navy)"/></marker>
+<marker id="a-blue" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2.4,4 Z" fill="var(--blue)"/></marker>
+<marker id="a-amber" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2.4,4 Z" fill="var(--amber)"/></marker>
+<marker id="a-gray" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2.4,4 Z" fill="var(--gray)"/></marker>
+<marker id="a-warn" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 L2.4,4 Z" fill="var(--warn)"/></marker>
+</defs>
+<text x="28" y="34" font-size="19" font-weight="700" fill="var(--navy)" text-anchor="start" >LIS–ERP Integration Platform — System Architecture</text>
+<text x="28" y="55" font-size="11" font-weight="400" fill="var(--sub)" text-anchor="start" >Labgenomics · 2024.04–2024.10 · Common stack  Java · Spring Boot · Spring WebFlux · Spring Security</text>
+<rect x="200" y="74" width="250" height="28" rx="14.0" fill="var(--ext)" stroke="var(--extborder)" stroke-width="1.2"/>
+<circle cx="217" cy="88.0" r="6.2" fill="none" stroke="var(--gray)" stroke-width="1.4"/>
+<circle cx="217" cy="85.5" r="2.5" fill="var(--gray)"/>
+<path d="M211.5,93.5 a5.5,4.2 0 0 1 11,0" fill="none" stroke="var(--gray)" stroke-width="1.4"/>
+<text x="230" y="88.0" font-size="10.5" font-weight="400" fill="var(--ink)" text-anchor="start"  dominant-baseline="middle">Integration manager · register · validate · integrate revenue</text>
+<rect x="470" y="74" width="250" height="28" rx="14.0" fill="var(--ext)" stroke="var(--extborder)" stroke-width="1.2"/>
+<circle cx="487" cy="88.0" r="6.2" fill="none" stroke="var(--gray)" stroke-width="1.4"/>
+<circle cx="487" cy="85.5" r="2.5" fill="var(--gray)"/>
+<path d="M481.5,93.5 a5.5,4.2 0 0 1 11,0" fill="none" stroke="var(--gray)" stroke-width="1.4"/>
+<text x="500" y="88.0" font-size="10.5" font-weight="400" fill="var(--ink)" text-anchor="start"  dominant-baseline="middle">Master-data owner · routings · FX</text>
+<polyline points="260,102 260,116" fill="none" stroke="var(--gray)" stroke-width="1.6" marker-end="url(#a-gray)"/>
+<polyline points="530,102 530,116" fill="none" stroke="var(--gray)" stroke-width="1.6" marker-end="url(#a-gray)"/>
+<text x="270" y="110" font-size="9" font-weight="400" fill="var(--gray)" text-anchor="start" >HTTP</text>
+<rect x="56" y="116" width="768" height="478" rx="13" fill="var(--appfill)" stroke="var(--appborder)" stroke-width="1.4"/>
+<rect x="56" y="116" width="768" height="30" rx="13" fill="var(--header)"/>
+<rect x="56" y="132" width="768" height="14" rx="0" fill="var(--header)"/>
+<text x="74" y="136" font-size="13" font-weight="700" fill="var(--navy)" text-anchor="start" >In-house LIS ↔ ERP10 integration web platform</text>
+<rect x="692" y="122" width="116" height="18" rx="9.0" fill="var(--pillnavy)" stroke="var(--navy)" stroke-width="1"/>
+<text x="750.0" y="131.0" font-size="9.5" font-weight="700" fill="var(--navy)" text-anchor="middle"  dominant-baseline="middle">Single web application</text>
+<text x="74" y="174" font-size="9.5" font-weight="700" fill="var(--sub)" text-anchor="start" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" >PRESENTATION · view layer</text>
+<rect x="74" y="190" width="732" height="48" rx="8" fill="var(--surface)" stroke="var(--border)" stroke-width="1.2"/>
+<rect x="74" y="190" width="3.4" height="48" rx="1.7" fill="var(--navy)"/>
+<text x="89" y="211" font-size="12" font-weight="600" fill="var(--ink)" text-anchor="start" >Revenue / integration screens</text>
+<text x="89" y="228" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >Thymeleaf · jQuery · TUI Grid · REST controllers (Billing · Integration · Admin)</text>
+<text x="74" y="270" font-size="9.5" font-weight="700" fill="var(--sub)" text-anchor="start" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" >BUSINESS · business layer</text>
+<rect x="74" y="286" width="233.33333333333334" height="100" rx="8" fill="var(--bluefill)" stroke="var(--blueborder)" stroke-width="1.2"/>
+<rect x="74" y="286" width="3.4" height="100" rx="1.7" fill="var(--blue)"/>
+<text x="89" y="307" font-size="12" font-weight="600" fill="var(--ink)" text-anchor="start" >BillingService · Strategy pattern</text>
+<text x="89" y="324" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >Per-domain implementations</text>
+<text x="89" y="338.5" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >Aggregate · lookup · validate</text>
+<text x="89" y="353.0" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >Free-adjustment · dedup</text>
+<rect x="323.33333333333337" y="286" width="233.33333333333334" height="100" rx="8" fill="var(--bluefill)" stroke="var(--blueborder)" stroke-width="1.2"/>
+<rect x="323.33333333333337" y="286" width="3.4" height="100" rx="1.7" fill="var(--blue)"/>
+<text x="338.33333333333337" y="307" font-size="12" font-weight="600" fill="var(--ink)" text-anchor="start" >IntegrationService</text>
+<text x="338.33333333333337" y="324" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >ERP10 integration (WebFlux · WebClient)</text>
+<text x="338.33333333333337" y="338.5" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >Non-blocking batch send</text>
+<text x="338.33333333333337" y="353.0" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >CamelCase→Snake · RSA · Proxy</text>
+<rect x="572.6666666666667" y="286" width="233.33333333333334" height="100" rx="8" fill="var(--surface)" stroke="var(--border)" stroke-width="1.2"/>
+<rect x="572.6666666666667" y="286" width="3.4" height="100" rx="1.7" fill="var(--navy)"/>
+<text x="587.6666666666667" y="307" font-size="12" font-weight="600" fill="var(--ink)" text-anchor="start" >Admin · integration history</text>
+<text x="587.6666666666667" y="324" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >Routing · base-FX master</text>
+<text x="587.6666666666667" y="338.5" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >Integration-history tracking</text>
+<text x="587.6666666666667" y="353.0" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >Selective failure reprocessing</text>
+<text x="74" y="418" font-size="9.5" font-weight="700" fill="var(--sub)" text-anchor="start" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" >DATA ACCESS · data-access layer</text>
+<rect x="74" y="434" width="732" height="48" rx="8" fill="var(--surface)" stroke="var(--border)" stroke-width="1.2"/>
+<rect x="74" y="434" width="3.4" height="48" rx="1.7" fill="var(--navy)"/>
+<text x="89" y="455" font-size="12" font-weight="600" fill="var(--ink)" text-anchor="start" >MyBatis · Multi-DataSource</text>
+<text x="89" y="472" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >Read LIS (MS SQL Server) · Write Operational DB (MySQL) — separate SqlSessionFactory</text>
+<rect x="74" y="514" width="732" height="56" rx="10" fill="var(--band)" stroke="var(--navy)" stroke-width="1.2" stroke-dasharray="6 4"/>
+<text x="88" y="535" font-size="11" font-weight="700" fill="var(--navy)" text-anchor="start" >Common foundation · cross-cutting</text>
+<text x="88" y="554" font-size="10" font-weight="400" fill="var(--ink)" text-anchor="start" >AuthN/AuthZ  Spring Security · Argon2 hashing · RBAC      ·      Session  Redis      ·      Conn. pool  HikariCP</text>
+<path d="M126,646 A64,11 0 0 0 254,646 L254,742 A64,11 0 0 1 126,742 Z" fill="var(--cylfill)" stroke="var(--blue)" stroke-width="1.3"/>
+<ellipse cx="190" cy="646" rx="64" ry="11" fill="var(--cylfill)" stroke="var(--blue)" stroke-width="1.3"/>
+<text x="190" y="675.5" font-size="12.5" font-weight="700" fill="var(--ink)" text-anchor="middle" >LIS</text>
+<text x="190" y="690.5" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="middle" >MS SQL Server</text>
+<text x="190" y="705.5" font-size="9.6" font-weight="600" fill="var(--blue)" text-anchor="middle" >Read-only</text>
+<text x="190" y="720.5" font-size="9.3" font-weight="400" fill="var(--sub)" text-anchor="middle" >Test / revenue source</text>
+<path d="M376,646 A64,11 0 0 0 504,646 L504,742 A64,11 0 0 1 376,742 Z" fill="var(--cylfill)" stroke="var(--blue)" stroke-width="1.3"/>
+<ellipse cx="440" cy="646" rx="64" ry="11" fill="var(--cylfill)" stroke="var(--blue)" stroke-width="1.3"/>
+<text x="440" y="675.5" font-size="12.5" font-weight="700" fill="var(--ink)" text-anchor="middle" >Operational DB</text>
+<text x="440" y="690.5" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="middle" >MySQL</text>
+<text x="440" y="705.5" font-size="9.6" font-weight="600" fill="var(--blue)" text-anchor="middle" >Read / write</text>
+<text x="440" y="720.5" font-size="9.0" font-weight="400" fill="var(--sub)" text-anchor="middle" >Revenue · integration log · production orders</text>
+<rect x="620" y="640" width="200" height="106" rx="12" fill="var(--amberfill)" stroke="var(--amberborder)" stroke-width="1.4"/>
+<rect x="620" y="640" width="3.4" height="106" rx="1.7" fill="var(--amber)"/>
+<text x="636" y="660" font-size="13" font-weight="700" fill="var(--amber)" text-anchor="start" >ERP10</text>
+<text x="636" y="676" font-size="9.6" font-weight="400" fill="var(--sub)" text-anchor="start" >Enterprise ERP · external system</text>
+<text x="636" y="698" font-size="10" font-weight="400" fill="var(--ink)" text-anchor="start" >· Sales Order (SO) API</text>
+<text x="636" y="716" font-size="10" font-weight="400" fill="var(--ink)" text-anchor="start" >· Production Order API</text>
+<text x="636" y="734" font-size="10" font-weight="400" fill="var(--ink)" text-anchor="start" >· Routing / BOM lookup API</text>
+<polyline points="190,594 190,646" fill="none" stroke="var(--blue)" stroke-width="1.8" marker-end="url(#a-blue)" marker-start="url(#a-blue)"/>
+<text x="176" y="620" font-size="9" font-weight="400" fill="var(--blue)" text-anchor="end" >Revenue aggregate · read (JDBC)</text>
+<polyline points="440,594 440,646" fill="none" stroke="var(--blue)" stroke-width="1.8" marker-end="url(#a-blue)" marker-start="url(#a-blue)"/>
+<text x="454" y="620" font-size="9" font-weight="400" fill="var(--blue)" text-anchor="start" >CRUD (JDBC)</text>
+<polyline points="705,594 705,638" fill="none" stroke="var(--amber)" stroke-width="1.8" marker-end="url(#a-amber)"/>
+<polyline points="745,638 745,594" fill="none" stroke="var(--amber)" stroke-width="1.6" marker-end="url(#a-amber)"/>
+<text x="690" y="614" font-size="9" font-weight="400" fill="var(--amber)" text-anchor="end" >Send SO / production ↓</text>
+<text x="690" y="628" font-size="9" font-weight="400" fill="var(--amber)" text-anchor="end" >Routing / BOM lookup ↑</text>
+<text x="28" y="782" font-size="11" font-weight="700" fill="var(--navy)" text-anchor="start" >Protocols</text>
+<line x1="96" y1="778" x2="124" y2="778" stroke="var(--gray)" stroke-width="2.6" marker-end="url(#a-gray)"/>
+<text x="132" y="782" font-size="10.5" font-weight="400" fill="var(--ink)" text-anchor="start" >HTTP  users</text>
+<line x1="232" y1="778" x2="260" y2="778" stroke="var(--blue)" stroke-width="2.6" marker-end="url(#a-blue)"/>
+<text x="268" y="782" font-size="10.5" font-weight="400" fill="var(--ink)" text-anchor="start" >JDBC  DB read / write</text>
+<line x1="410" y1="778" x2="438" y2="778" stroke="var(--amber)" stroke-width="2.6" marker-end="url(#a-amber)"/>
+<text x="446" y="782" font-size="10.5" font-weight="400" fill="var(--ink)" text-anchor="start" >WebFlux non-blocking  ERP</text>
+<text x="648" y="782" font-size="9.5" font-weight="400" fill="var(--sub)" text-anchor="start" >Strategy pattern = settlement logic separated by test / revenue domain</text>
+</svg>

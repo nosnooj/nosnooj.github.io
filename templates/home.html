@@ -6,27 +6,28 @@
   <section class="wrap">
     <div id="cover-stage">
       {% if site.profile_photo %}
-      <div class="cover-photo"><img src="{{ root }}{{ site.profile_photo }}" alt="{{ site.name }}" width="360" height="480" decoding="async"></div>
+      <div class="cover-photo"><img src="{{ root }}{{ site.profile_photo }}" alt="{{ site.name.ko }}" width="360" height="480" decoding="async"></div>
       {% else %}
       <div class="cover-photo ph"><span>증명사진<br>3 × 4</span></div>
       {% endif %}
       <div class="cover-kicker">{{ site.kicker }}</div>
-      <h1 class="cover-name">{{ site.name }}</h1>
-      <div class="cover-role">{{ site.role }}</div>
-      <div class="cover-bio">{{ site.bio_line }}</div>
-      <p class="cover-line">{{ site.positioning }}</p>
+      <h1 class="cover-name">{{ site.name | t }}</h1>
+      <div class="cover-role">{{ site.role | t }}</div>
+      <div class="cover-bio">{{ site.bio_line | t }}</div>
+      <p class="cover-line">{{ site.positioning | t }}</p>
       <div class="cover-metrics">
         {% for m in site.metrics %}
-        <div><b>{{ m.value }}</b><i>{{ m.label }}</i></div>
+        <div><b>{{ m.value | t }}</b><i>{{ m.label | t }}</i></div>
         {% endfor %}
       </div>
       <div class="cover-cta">
-        <a class="btn primary" href="#work">프로젝트 보기 ↓</a>
+        <a class="btn primary" href="#work">{{ tt("프로젝트 보기", "View projects") }} ↓</a>
         <details class="dl-menu up">
-          <summary class="btn alt">이력서 ▾</summary>
+          <summary class="btn alt">{{ tt("이력서", "Resume") }} ▾</summary>
           <div class="dl-pop">
             {% for r in site.resumes %}
-            <a href="{{ root }}{{ r.pdf }}" download="{{ r.pdfname }}">{{ r.label }} ↓</a>
+            <a class="i ko" href="{{ root }}{{ r.pdf }}" download="{{ r.pdfname }}">{{ r.label.ko }} ↓</a>
+            <a class="i en" href="{{ root }}{{ r.pdf_en }}" download="{{ r.pdfname_en }}">{{ r.label.en }} ↓</a>
             {% endfor %}
           </div>
         </details>
@@ -38,15 +39,15 @@
   <!-- Work -->
   <section class="wrap section" id="work">
     <div class="section-eyebrow">Work</div>
-    <p id="work-intro">{{ site.work_intro }}</p>
+    <p id="work-intro">{{ site.work_intro | t }}</p>
     <div id="work-grid">
       {% for p in projects %}
       <a class="wcard" href="{{ root }}work/{{ p.slug }}/" style="--acc:var(--c-{{ p.accent }})">
         <div class="top"><span class="ptag">{{ p.code }}</span><span>{{ p.period }}</span></div>
-        <h3>{{ p.name }}</h3>
-        <p>{{ p.card_one_liner }}</p>
-        <div class="stack">{{ p.card_stack | join(" · ") }}</div>
-        <span class="go">상세 보기 →</span>
+        <h3>{{ p.name | t }}</h3>
+        <p>{{ p.card_one_liner | t }}</p>
+        <div class="stack">{% for s in p.card_stack %}{{ s | t }}{% if not loop.last %} · {% endif %}{% endfor %}</div>
+        <span class="go">{{ tt("상세 보기", "View case") }} →</span>
       </a>
       {% endfor %}
     </div>
@@ -57,49 +58,49 @@
     <div class="section-eyebrow">About</div>
 
     <div class="about-block" id="about-lede">
-      <p>{{ site.about.lede }}</p>
-      {% if site.about.aspiration %}<p class="aspiration">{{ site.about.aspiration }}</p>{% endif %}
+      <p>{{ site.about.lede | t }}</p>
+      {% if site.about.aspiration %}<p class="aspiration">{{ site.about.aspiration | t }}</p>{% endif %}
     </div>
 
     <div class="about-block" id="about-career">
-      <h3>경력</h3>
+      <h3>{{ tt("경력", "Experience") }}</h3>
       {% for c in site.about.career %}
       <div class="exp">
-        <div class="eh"><span class="mono">{{ c.period }}</span><b>{{ c.company }}</b><i>{{ c.role }}</i></div>
-        {% if c.scope %}<div class="scope">{{ c.scope }}</div>{% endif %}
-        <ul>{% for pt in c.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+        <div class="eh"><span class="mono">{{ c.period | t }}</span><b>{{ c.company | t }}</b><i>{{ c.role | t }}</i></div>
+        {% if c.scope %}<div class="scope">{{ c.scope | t }}</div>{% endif %}
+        <ul>{% for pt in c.points %}<li>{{ pt | t }}</li>{% endfor %}</ul>
       </div>
       {% endfor %}
     </div>
 
     <div class="about-block" id="about-skills">
-      <h3>스킬</h3>
+      <h3>{{ tt("스킬", "Skills") }}</h3>
       {% for s in site.about.skills %}
       <div class="skill-row">
-        <span class="lab">{{ s.label }}</span>
-        <div class="chips">{% for it in s["items"] %}<span>{{ it }}</span>{% endfor %}</div>
+        <span class="lab">{{ s.label | t }}</span>
+        <div class="chips">{% for it in s["items"] %}<span>{{ it | t }}</span>{% endfor %}</div>
       </div>
       {% endfor %}
     </div>
 
     <div class="about-block" id="about-education">
-      <h3>학력</h3>
+      <h3>{{ tt("학력", "Education") }}</h3>
       {% for e in site.about.education %}
-      <div class="tl"><span class="mono">{{ e.period }}</span><span>{{ e.title }}<br>{{ e.detail }}</span></div>
+      <div class="tl"><span class="mono">{{ e.period }}</span><span>{{ e.title | t }}<br>{{ e.detail | t }}</span></div>
       {% endfor %}
     </div>
 
     <div class="about-block" id="about-certs">
-      <h3>자격증 · 어학</h3>
+      <h3>{{ tt("자격증 · 어학", "Certifications · Language") }}</h3>
       {% for c in site.about.certs %}
-      <div class="cert"><span class="mono">{{ c.date }}</span><span>{{ c.title }} <span class="id">· {{ c.meta }}</span></span></div>
+      <div class="cert"><span class="mono">{{ c.date }}</span><span>{{ c.title | t }} <span class="id">· {{ c.meta }}</span></span></div>
       {% endfor %}
     </div>
 
     <div class="about-block" id="about-etc">
-      <h3>수상 · 활동 · 병역</h3>
+      <h3>{{ tt("수상 · 활동 · 병역", "Awards · Activities · Military") }}</h3>
       {% for e in site.about.etc %}
-      <div class="cert"><span class="mono">{{ e.date }}</span><span>{{ e.title }}{% if e.detail %}<br>{{ e.detail }}{% endif %}</span></div>
+      <div class="cert"><span class="mono">{{ e.date }}</span><span>{{ e.title | t }}{% if e.detail %}<br>{{ e.detail | t }}{% endif %}</span></div>
       {% endfor %}
     </div>
   </section>

@@ -19,6 +19,7 @@ import shutil
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from markupsafe import Markup, escape
 
 ROOT = Path(__file__).resolve().parent
 # 출력 경로는 BUILD_OUT로 재정의 가능 (기본 dist/)
@@ -101,6 +102,18 @@ def inline_diagram(svg_path: Path) -> tuple[str, str]:
 
 
 # ---------------------------------------------------------------------------
+# 이중언어 렌더 — L(ko,en) → <span class="i ko/en">; 평문은 그대로 통과
+# ---------------------------------------------------------------------------
+def t(value):
+    """content.py의 L(ko,en) 값을 양 언어 span으로 렌더. 평문 str/숫자는 그대로 둔다."""
+    if isinstance(value, dict) and "ko" in value and "en" in value:
+        return Markup('<span class="i ko">{}</span><span class="i en">{}</span>').format(
+            value["ko"], value["en"]
+        )
+    return value
+
+
+# ---------------------------------------------------------------------------
 # 렌더링
 # ---------------------------------------------------------------------------
 def build() -> None:
@@ -121,6 +134,10 @@ def build() -> None:
         trim_blocks=True,
         lstrip_blocks=True,
     )
+    env.globals["t"] = t
+    env.filters["t"] = t
+    # 템플릿 하드코딩 문구용 — tt("홈","Home") → 양 언어 span
+    env.globals["tt"] = lambda ko, en: t({"ko": ko, "en": en})
 
     site = content.SITE
     projects = content.PROJECTS
@@ -132,11 +149,15 @@ def build() -> None:
         if proj.get("build_fig"):
             figs.append(proj["build_fig"])  # 본문(구현 섹션) 도면도 동일 변환
         for fig in figs:
-            if fig.get("file"):
-                svg_markup, css = inline_diagram(DIAGRAMS / fig["file"])
-                fig["svg"] = svg_markup
-                if css:
-                    diagram_css_chunks.append(css)
+            # 국문(file→svg)·영문(file_en→svg_en) 트윈을 각각 인라인.
+            # 영문 SVG가 아직 없으면 건너뛰고 템플릿이 국문으로 폴백한다.
+            for src_key, out_key in (("file", "svg"), ("file_en", "svg_en")):
+                fname = fig.get(src_key)
+                if fname and (DIAGRAMS / fname).exists():
+                    svg_markup, css = inline_diagram(DIAGRAMS / fname)
+                    fig[out_key] = svg_markup
+                    if css:
+                        diagram_css_chunks.append(css)
     diagram_css = "".join(dict.fromkeys(diagram_css_chunks))  # 중복 제거, 순서 유지
 
     common = dict(site=site, projects=projects, diagram_css=diagram_css)

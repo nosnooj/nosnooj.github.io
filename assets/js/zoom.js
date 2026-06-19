@@ -50,7 +50,8 @@
 
   function open(fig) {
     ensure();
-    var svg = fig.querySelector("svg");
+    var lang = document.documentElement.dataset.lang || "ko";
+    var svg = fig.querySelector(".dgm." + lang + " svg") || fig.querySelector("svg");
     if (!svg) return;
     stage.innerHTML = "";
     var clone = svg.cloneNode(true);
@@ -60,7 +61,12 @@
     clone.style.display = "block";
     stage.appendChild(clone);
     var cap = fig.querySelector(".cap");
-    overlay.querySelector(".lb-cap").textContent = cap ? cap.firstChild.textContent.trim() : "";
+    var capText = "";
+    if (cap) {
+      var capI = cap.querySelector(".i." + lang);
+      capText = (capI ? capI.textContent : cap.textContent).replace(/⤢[\s\S]*$/, "").trim();
+    }
+    overlay.querySelector(".lb-cap").textContent = capText;
     setScale(1);
     lastFocused = document.activeElement;
     overlay.classList.add("on");

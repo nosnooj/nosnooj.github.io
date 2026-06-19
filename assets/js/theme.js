@@ -7,6 +7,15 @@ function toggleTheme() {
   try { localStorage.setItem("theme", next); } catch (e) {}
 }
 
+// 언어 토글 — html[data-lang] 전환 + localStorage 영속. 브랜드색(네이비↔틸)도 함께 바뀐다.
+function toggleLang() {
+  var root = document.documentElement;
+  var next = root.dataset.lang === "en" ? "ko" : "en";
+  root.dataset.lang = next;
+  root.setAttribute("lang", next);
+  try { localStorage.setItem("lang", next); } catch (e) {}
+}
+
 // OS 테마가 바뀌면, 사용자가 수동 저장한 값이 없을 때만 따라간다.
 try {
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function (e) {
