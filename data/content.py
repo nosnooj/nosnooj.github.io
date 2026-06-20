@@ -46,16 +46,6 @@ SITE = {
         "site_url": "https://nosnooj.github.io",
     },
     "profile_photo": "assets/img/profile.jpg",   # 증명사진 360x480(3:4)
-    "resumes": [
-        # 메인 이력서 = 요약형(SUMMARY). en = 임시 영문 PDF(사용자 추후 교체)
-        {"label": L("이력서", "Resume"),
-         "pdf": "assets/files/resume_summary.pdf", "pdfname": "손준혁_이력서.pdf",
-         "pdf_en": "assets/files/resume_summary.en.pdf", "pdfname_en": "JoonHyuk_Son_Resume.pdf"},
-        # 경력기술서 = 상세(FULL). en = 임시 플레이스홀더(사용자 추후 교체)
-        {"label": L("경력기술서", "CV (detailed)"),
-         "pdf": "assets/files/resume_full.pdf", "pdfname": "손준혁_경력기술서.pdf",
-         "pdf_en": "assets/files/resume_full.en.pdf", "pdfname_en": "JoonHyuk_Son_CV.pdf"},
-    ],
     # 표지 대표 정량 성과 — 이력서 SUMMARY 대표 성과와 동일 4종(0건·70%·46%·99.9%).
     "metrics": [
         {"value": L("0건", "0"), "label": L("데이터 이관 오류", "Data-migration errors")},

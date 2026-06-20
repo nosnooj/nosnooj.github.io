@@ -11,3 +11,6 @@ venv/
 *.iws
 .idea_modules/
 out/
+
+# 이력서 원본(개인정보) — repo·배포에서 영구 제외
+assets/files/resume_*

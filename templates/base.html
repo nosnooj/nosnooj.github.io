@@ -53,15 +53,6 @@
     <a href="{{ site.contacts.github_url }}" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
   </nav>
   <div class="right">
-    <details class="dl-menu">
-      <summary class="btn alt">{{ tt("이력서", "Resume") }} ▾</summary>
-      <div class="dl-pop">
-        {% for r in site.resumes %}
-        <a class="i ko" href="{{ root }}{{ r.pdf }}" download="{{ r.pdfname }}">{{ r.label.ko }} ↓</a>
-        <a class="i en" href="{{ root }}{{ r.pdf_en }}" download="{{ r.pdfname_en }}">{{ r.label.en }} ↓</a>
-        {% endfor %}
-      </div>
-    </details>
     <button class="btn lang-btn" type="button" onclick="toggleLang()" aria-label="언어 전환 / Switch language"><span class="i ko">EN</span><span class="i en">KO</span></button>
     <button class="btn icon" type="button" onclick="toggleTheme()" aria-label="라이트/다크 전환 / Toggle theme">◐</button>
   </div>
@@ -82,18 +73,5 @@
 
 <script src="{{ root }}assets/js/theme.js" defer></script>
 <script src="{{ root }}assets/js/zoom.js" defer></script>
-<script>
-(function(){
-  var all = function(){ return document.querySelectorAll("details.dl-menu"); };
-  all().forEach(function(d){
-    d.addEventListener("toggle", function(){
-      if (d.open) all().forEach(function(o){ if (o !== d) o.open = false; });
-    });
-  });
-  document.addEventListener("click", function(e){
-    all().forEach(function(d){ if (d.open && !d.contains(e.target)) d.open = false; });
-  });
-})();
-</script>
 </body>
 </html>
